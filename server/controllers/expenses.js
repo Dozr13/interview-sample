@@ -1,4 +1,4 @@
-let errorMessage = "Oops! Something went wrong. Our engineers have been informed!"
+let errMsg = "Oops! Something went wrong. Our engineers have been informed and will get the issue patched up right away, thank you for your patience!"
 
 module.exports = {
   readExpenses: async (req, res) => {
@@ -9,12 +9,15 @@ module.exports = {
     if (start && end){
       db.expenses.read_all_expenses_date(id, start, end)
         .then(expenses => res.status(200).send(expenses))
+        .catch(errMsg => console.log(errMsg))
     } else if (start){
       db.expenses.read_all_expenses_date(id, start, Date.now())
         .then(expenses => res.status(200).send(expenses))
+        .catch(errMsg => console.log(errMsg))
     } else {
       db.expenses.read_all_expenses(id)
         .then(expenses => res.status(200).send(expenses))
+        .catch(errMsg => console.log(errMsg))
     }
   },
 
@@ -27,7 +30,7 @@ module.exports = {
     if(id){
       db.expenses.create_expense([new Date(due_date), expense_title, amount, bill_type, id])
         .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
-        .catch(err => console.log(err))
+        .catch(errMsg => console.log(errMsg))
     }
   },
 
@@ -44,6 +47,7 @@ module.exports = {
     // console.log(newBill)
     req.app.get('db').expenses.edit_expense ([new Date(dd), et, am, bt, req.params.id, req.session.user.id]) 
     .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
+    .catch(errMsg => console.log(errMsg))
   },
 
   // Passes Postman tests
@@ -51,17 +55,13 @@ module.exports = {
     // console.log('read')
     req.app.get('db').expenses.read_expense([req.params.id, req.session.user.id])
       .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
+      .catch(errMsg => console.log(errMsg))
   },
 
   // Passes Postman tests
   deleteExpense: (req, res) => {
-    // console.log('delleeetete')
     req.app.get('db').expenses.delete_expense([req.params.id, req.session.user.id])
       .then(_ => res.sendStatus(200))
-
-
-      .catch( err => {
-        
-      })
+      .catch(errMsg => console.log(errMsg))
   }
 }

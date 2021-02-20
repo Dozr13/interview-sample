@@ -36,7 +36,7 @@ app.get('/api/auth/me', ctrlUser.getUser)
 app.post('/api/auth/logout', ctrlUser.logout)
 
 // Expense Endpoints
-app.get('/api/expenses', auth.userOnly, ctrlExpense.readExpenses)
+app.get('/api/expenses-data', auth.userOnly, ctrlExpense.readExpenses)
 app.post('/api/new-expense', auth.userOnly, ctrlExpense.createExpense)
 app.put('/api/edit-expense/:id', auth.userOnly, ctrlExpense.editExpense)
 app.get('/api/expense/:id', auth.userOnly, ctrlExpense.readExpense)

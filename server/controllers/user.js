@@ -50,7 +50,7 @@ module.exports = {
   // Passes Postman tests
   getUser: async (req, res) => {
     if(req.session.user){
-      return res.status(201).send(req.session.user)
+      return res.status(200).send(req.session.user)
     }
     res.sendStatus(404)
   }
