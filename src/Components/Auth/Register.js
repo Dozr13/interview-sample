@@ -22,22 +22,24 @@ function Register() {
   return (
     <div>
       <input
-        placeholder='Enter Email: '
+        placeholder='Enter Email'
+        autoComplete='username'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        placeholder='First Name: '
+        placeholder='First Name'
         value={firstName}
         onChange={(e) => setFirst(e.target.value)}
       />
       <input
-        placeholder='Last Name: '
+        placeholder='Last Name'
         value={lastName}
         onChange={(e) => setLast(e.target.value)}
       />
       <input
         type='password'
+        autoComplete='new-password'
         placeholder='Password: '
         value={password}
         onChange={(e) => setPassword(e.target.value)}

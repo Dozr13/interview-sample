@@ -12,7 +12,7 @@ useEffect(() => {
     axios.get('/api/auth/me').then(({data}) => {
       userAuth.setUser(data)
     }).catch(err => push('/login'))}
-}, [userAuth.user])
+}, [push, userAuth, userAuth.user])
 
 
   return (

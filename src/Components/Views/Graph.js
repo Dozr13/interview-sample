@@ -12,7 +12,7 @@ function Graph() {
       axios.get('/api/auth/me').then(({data}) => {
         userAuth.setUser(data)
       }).catch(err => push('/login'))}
-  }, [userAuth.user])
+  }, [push, userAuth, userAuth.user])
   return (
     <div>
       This is the Graph Component! Bound to include Chart.js      

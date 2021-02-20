@@ -1,0 +1,17 @@
+.links-test{
+  margin-top: 30px;
+}
+/* ! Only a temp style to move the links down below the logout btn */
+
+#logout-btn{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 13px;
+  margin-top: 5px;
+}
+
+.logout-style{
+  background-color: lightblue;
+  border-radius: 13px;
+}

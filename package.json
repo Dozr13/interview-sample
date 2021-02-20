@@ -19,6 +19,7 @@
     "bcryptjs": "^2.4.3",
     "chart.js": "^2.9.4",
     "dotenv": "^8.2.0",
+    "eslint-plugin-react-hooks": "^0.0.0-8af27aeed",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "massive": "^6.6.5",
@@ -41,7 +42,14 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "browserslist": {
     "production": [
