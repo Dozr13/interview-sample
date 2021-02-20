@@ -7,11 +7,12 @@
   position: absolute;
   top: 0;
   right: 0;
-  margin: 13px;
-  margin-top: 5px;
+  margin: 30px;
 }
 
 .logout-style{
+  height: 40px;
+  width: 70px;
   background-color: lightblue;
   border-radius: 13px;
 }

@@ -18,13 +18,8 @@ const handleLogin = () => {
 
   return (
     <div>
-
       <form id='login-container'>
-        <section id='register-btn'>
-          <Link to='/register' >
-            <button autoFocus className='register-style' type='button'>Register</button>
-          </Link>
-        </section>
+
         <section>
           <input
             className='entry-text'
@@ -33,7 +28,7 @@ const handleLogin = () => {
             placeholder='Enter Email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            />
+          />
           <input
             className='entry-text'
             type='password'
@@ -41,11 +36,27 @@ const handleLogin = () => {
             placeholder='Enter Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            />
+          />
         </section>
 
         <section id='login-btn'>
-          <button className='login-style' type='submit' onClick={handleLogin}>Login</button>
+          <button 
+            className='login-style' 
+            type='submit' 
+            onClick={handleLogin}>
+              Login
+          </button>
+        </section>
+
+        <section id='register-btn'>
+          <Link to='/register' >
+            <button 
+              autoFocus 
+              className='register-style' 
+              type='button'>
+                Register
+            </button>
+          </Link>
         </section>
 
 

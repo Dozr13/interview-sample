@@ -7,8 +7,9 @@ function Header(props) {
 
   const userAuth = useContext(AuthContext)
 
-const handleLogout = () => {
-  userAuth.logout()
+
+  const handleLogout = () => {
+    userAuth.logout()
 }
 
 
@@ -21,9 +22,16 @@ const handleLogout = () => {
         <Link to="pie">View as Pie Chart</Link>
       </nav>
 
+      {userAuth.user &&
       <section id='logout-btn'>
-          <button className='logout-style' type='submit' onClick={handleLogout}>Logout</button>
-        </section>
+          <button 
+            className='logout-style' 
+            type='submit' 
+            onClick={handleLogout}>
+              Logout
+          </button>
+      </section>
+      }
     </div>
   )
 }

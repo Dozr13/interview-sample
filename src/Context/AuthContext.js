@@ -16,8 +16,7 @@ export const AuthProvider = (props) => {
   }
 
   const logout = () => {
-    axios.post('/api/auth/logout').then((
-      {data}) => {
+    axios.post('/api/auth/logout').then(({data}) => {
         setUser(null)
         push('/login')
       }
@@ -26,6 +25,7 @@ export const AuthProvider = (props) => {
 
   const register = (email, firstName, lastName, password, profilePic) => {
     axios.post('/api/auth/register', {email, firstName, lastName, password, profilePic}).then(({data}) => {
+      console.log(data)
       setUser(data)
       push('/')
     })

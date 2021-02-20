@@ -32,7 +32,10 @@
 
 #register-btn{
   display: flex;
-  
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 70px;
 }
 
 .register-style{
@@ -42,5 +45,4 @@
   top: 0;
   border-radius: 50%;
   background-color: orange;
-  
 }

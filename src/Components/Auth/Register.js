@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import axios from 'axios'
+import React, {useState, useContext} from 'react'
+import {AuthContext} from '../../Context/AuthContext'
 
 function Register() {
   const [email, setEmail] = useState('')
@@ -7,16 +7,15 @@ function Register() {
   const [lastName, setLast] = useState('')
   const [password, setPassword] = useState('')
   const [profilePic, setPic] = useState('')
+  const userAuth = useContext(AuthContext)
 
   const register = () => {
-    axios.post('/api/auth/register', {email, password}).then(({data}) => {
-      console.log(data)
-      setEmail('')
-      setFirst('')
-      setLast('')
-      setPassword('')
-      setPic('')
-    })
+    userAuth.register(email, firstName, lastName, password, profilePic)
+    setEmail('')
+    setFirst('')
+    setLast('')
+    setPassword('')
+    setPic('')
   }
 
   return (

@@ -26,9 +26,9 @@ module.exports = {
     // console.log('make')
     const db = req.app.get('db')
     const {id} = req.session.user
-    const {due_date, expense_title, amount, bill_type} = req.body
+    const {dueDate, expenseTitle, amount, billType} = req.body
     if(id){
-      db.expenses.create_expense([new Date(due_date), expense_title, amount, bill_type, id])
+      db.expenses.create_expense([new Date(dueDate), expenseTitle, amount, billType, id])
         .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
         .catch(errMsg => console.log(errMsg))
     }
@@ -37,13 +37,13 @@ module.exports = {
   // Passes Postman test
   // ! Later edit if 1 item is left blank, currently throws typeError.
   editExpense: async (req, res) => {
-    const {due_date, expense_title, amount, bill_type} = req.body
+    const {dueDate, expenseTitle, amount, billType} = req.body
     const bill = await req.app.get('db').expenses.read_expense([req.params.id, req.session.user.id])[0]
     // let newBill = [due_date: due_date || bill.due_date, expense_title: expense_title || bill.expense_title, amount: amount || bill.amount, bill_type: bill_type || bill.bill_type]
-    let dd = due_date || bill.due_date
-    let et = expense_title || bill.expense_title
+    let dd = dueDate || bill.dueDate
+    let et = expenseTitle || bill.expenseTitle
     let am = amount || bill.amount
-    let bt = bill_type || bill.bill_type
+    let bt = billType || bill.billType
     // console.log(newBill)
     req.app.get('db').expenses.edit_expense ([new Date(dd), et, am, bt, req.params.id, req.session.user.id]) 
     .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
