@@ -1,12 +1,13 @@
 import React, {useContext, useEffect} from 'react'
-// import {useHistory} from 'react-router-dom'
 import {AuthContext} from '../../Context/AuthContext'
+import {Link} from 'react-router-dom'
+// import {AuthContext} from '../../Context/AuthContext'
+import './Home.css'
 import axios from 'axios'
 
 function Home() {
 const userAuth = useContext(AuthContext)
-// const {push} = useHistory()
-// console.log(userAuth)
+console.log(userAuth)
 useEffect(() => {
   if(!userAuth.user){
     axios.get('/api/auth/me').then(({data}) => {
@@ -16,8 +17,20 @@ useEffect(() => {
 
 
   return (
-    <div>
-      This is the home component!
+    <div className='bottom'>
+
+      <section id='chart-btns'>
+
+        <button className='graph-btn'>
+          <Link to="/graph">View Graph</Link>
+        </button>
+
+        <button className='pie-btn'>
+          <Link to="/pie">View Pie Chart</Link>
+        </button>
+
+      </section>
+
     </div>
   )
 }

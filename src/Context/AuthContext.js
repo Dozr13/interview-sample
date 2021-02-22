@@ -11,14 +11,14 @@ export const AuthProvider = (props) => {
   const login = (email, password) => {
     axios.post('/api/auth/login', {email, password}).then(({data}) => {
       setUser(data)
-      push('/')
+      push('/home')
     })
   }
 
   const logout = () => {
     axios.post('/api/auth/logout').then(({data}) => {
         setUser(null)
-        push('/login')
+        push('/')
       }
     )
   }
@@ -27,7 +27,7 @@ export const AuthProvider = (props) => {
     axios.post('/api/auth/register', {email, firstName, lastName, password, profilePic}).then(({data}) => {
       console.log(data)
       setUser(data)
-      push('/')
+      push('/home')
     })
   }
 

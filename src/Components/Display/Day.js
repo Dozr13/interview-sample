@@ -2,22 +2,23 @@ import React, {useContext, useEffect} from 'react'
 import {AuthContext} from '../../Context/AuthContext'
 import axios from 'axios'
 
-function Pie() {
+function Day() {
   const userAuth = useContext(AuthContext)
 
-    
+
   useEffect(() => {
     if(!userAuth.user){
       axios.get('/api/auth/me').then(({data}) => {
         userAuth.setUser(data)
       }).catch(err => console.log(err))}
-    }, [])
+  }, [])
 
-      return (
+
+  return (
     <div>
-      This is the Pie component! Also bound to use Chart.js!      
+      This is the Day Component!
     </div>
   )
 }
 
-export default Pie
+export default Day
