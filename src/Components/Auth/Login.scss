@@ -1,0 +1,50 @@
+$main-color: #BADA55;
+
+
+#login-container{
+  height: 85vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+}
+
+.entry-text{
+  height: 2rem;
+  width: 15rem;
+  text-align: center;
+  margin: 10px;
+}
+
+#login-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-style{
+  height: 3rem;
+  width: 8rem;
+  border-radius: 30%;
+  background-color: rgb(14, 134, 14);
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+#register-btn{
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  margin: 70px;
+}
+
+.register-style{
+  height: 3rem;
+  width: 8rem;
+  
+  border-radius: 50%;
+  background-color: orange;
+}

@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 module.exports = {
   // Passes Postman tests
   register: async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const {email, firstName, lastName, password, profilePic} = req.body
     const db = req.app.get('db')
     const result = await db.user.find_user([email])
@@ -18,9 +18,9 @@ module.exports = {
     req.session.user = {
       id: user.id,
       email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      profilePic: user.profilePic
+      firstName: user.first_name,
+      lastName: user.last_name,
+      profilePic: user.profile_pic
     }
     return res.status(200).send(req.session.user)
   },
@@ -37,7 +37,7 @@ module.exports = {
     if(!isAuthenticated){
       return res.status(403).send('Incorrect Password, please try again')
     }
-    req.session.user = {id: user.id, email: user.email, firstName: user.firstName, lastName: user.lastName, profilePic: user.profilePic}
+    req.session.user = {id: user.id, email: user.email, firstName: user.first_name, lastName: user.last_name, profilePic: user.profile_pic}
     return res.send(req.session.user)
   },
 

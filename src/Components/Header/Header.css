@@ -1,9 +1,8 @@
-*{
+* {
   text-decoration: none;
 }
 
-
-#header{
+#header {
   height: 15vh;
   width: 100vw;
   display: flex;
@@ -13,33 +12,33 @@
   background-color: orange;
 }
 
-
-.links-test{
+#logged-in {
   display: flex;
-  text-decoration: none;
 }
-/* ! Only a temp style to move the links down below the logout btn */
 
-.home-link{
+/* ! Only a temp style to move the links down below the logout btn */
+.home-link {
   font-size: 2rem;
   color: aliceblue;
 }
 
-.month-link{
-  font-size: 2rem;
-
+.title {
+  font-size: 5rem;
 }
 
-.week-link{
-  font-size: 2rem;
-}
-
-.day-link{
+.month-link {
   font-size: 2rem;
 }
 
+.week-link {
+  font-size: 2rem;
+}
 
-#logout-btn{
+.day-link {
+  font-size: 2rem;
+}
+
+#logout-btn {
   position: absolute;
   top: 0;
   right: 0;
@@ -47,9 +46,10 @@
   /* margin-right: ; */
 }
 
-.logout-style{
+.logout-style {
   height: 40px;
   width: 70px;
   background-color: lightblue;
   border-radius: 13px;
 }
+/*# sourceMappingURL=Header.css.map */

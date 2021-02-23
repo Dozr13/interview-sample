@@ -1,25 +1,24 @@
-
-
-#chart-btns{
+#chart-btns {
   height: 85vh;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 
-.graph-btn{
-  height: 25px;
+.graph-btn {
+  /* height: 25px; */
   background-color: deepskyblue;
   border: none;
   border-radius: 45%;
   margin: 50px;
 }
 
-.pie-btn{
+.pie-btn {
   /* text-decoration: none; */
-  height: 25px;
+  /* height: 25px; */
   background-color: deepskyblue;
   border: none;
   border-radius: 45%;
   margin: 50px;
 }
+/*# sourceMappingURL=Home.css.map */

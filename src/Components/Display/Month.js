@@ -13,14 +13,13 @@ import addDays from 'date-fns/addDays'
 import startOfMonth from 'date-fns/startOfMonth'
 import endOfMonth from 'date-fns/endOfMonth'
 
-import endOfDay from 'date-fns/endOfDay'
+// import endOfDay from 'date-fns/endOfDay'
+import endOfWeek from 'date-fns/endOfWeek'
 import isSameMonth from 'date-fns/isSameMonth'
 import isSameDay from 'date-fns/isSameDay'
 import parse from 'date-fns/parse'
 
-
-import './Month.css'
-
+import './Month.scss'
 
 function Month() {
   const userAuth = useContext(AuthContext)
@@ -90,7 +89,7 @@ function Month() {
     const monthStart = startOfMonth(currentDate)
     const monthEnd = endOfMonth(monthStart)
     const startDate = startOfWeek(monthStart)
-    const endDate = endOfDay(monthEnd)
+    const endDate = endOfWeek(monthEnd)
     const dateFormat = 'd'
     const rows = []
 
@@ -101,16 +100,17 @@ function Month() {
     while(day <= endDate){
       for(let i = 0; i < 7; i++){
         formattedDate = format(day, dateFormat)
-        const dayClone = day
-        console.log(dayClone)
+        const cloneDay = day
+        // console.log(dayClone)
         days.push(
-          <div className={`column cell ${!isSameMonth(day, monthStart)
-          ? 'disabled' : isSameDay(day, selectedDate)
-          ? 'selected' : '' } `}
+          <div 
+          className={`column cell ${!isSameMonth(day, monthStart) ? 'disabled' 
+            : isSameDay(day, selectedDate) ? 'selected' : ''}`}
           key={day}
-          onClick={() => onDateClick(dayClone)}>
-          <span className='number bg'>{formattedDate}</span>
-          {/* <span className='bg'>{formattedDate}</span> */}
+          onClick={() => onDateClick(parse(cloneDay))}
+          >
+            <span className='number'>{formattedDate}</span>
+            <span className='bg'>{formattedDate}</span>
           </div>
         )
         day = addDays(day, 1)

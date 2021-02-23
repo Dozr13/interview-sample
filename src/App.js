@@ -1,9 +1,8 @@
 // import React, {useState, useEffect} from 'react'
 import routes from './routes'
 import Header from './Components/Header/Header'
-// import MonthCalendar from './Components/Display/MonthCalendar'
 
-import './App.css';
+import './App.scss';
 
 
 function App() {

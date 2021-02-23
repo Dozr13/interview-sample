@@ -1,14 +1,15 @@
 import React, {useState, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {AuthContext} from '../../Context/AuthContext'
-import './Login.css'
+import './Login.scss'
 
 function Login(props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const userAuth = useContext(AuthContext)
 
-const handleLogin = () => {
+const handleLogin = (e) => {
+  e.preventDefault()
   userAuth.login(email, password)
   setEmail('')
   setPassword('')
@@ -18,7 +19,10 @@ const handleLogin = () => {
 
   return (
     <div>
-      <form id='login-container'>
+
+      <form id='login-container' onSubmit={handleLogin}>
+
+        <h3>Welcome! Please Login Below</h3>
 
         <section>
           <input
@@ -42,8 +46,7 @@ const handleLogin = () => {
         <section id='login-btn'>
           <button 
             className='login-style' 
-            type='submit' 
-            onClick={handleLogin}>
+            type='submit'>
               Login
           </button>
         </section>

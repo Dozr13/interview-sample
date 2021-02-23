@@ -1,13 +1,13 @@
 import React, {useContext, useEffect} from 'react'
 import {AuthContext} from '../../Context/AuthContext'
 import {Link} from 'react-router-dom'
-// import {AuthContext} from '../../Context/AuthContext'
-import './Home.css'
+import './Home.scss'
 import axios from 'axios'
 
 function Home() {
 const userAuth = useContext(AuthContext)
-console.log(userAuth)
+// console.log(userAuth)
+
 useEffect(() => {
   if(!userAuth.user){
     axios.get('/api/auth/me').then(({data}) => {

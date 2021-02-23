@@ -1,0 +1,26 @@
+
+
+#chart-btns{
+  height: 85vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.graph-btn{
+  height: 4rem;
+  width: 13rem;
+  background-color: deepskyblue;
+  border: none;
+  border-radius: 45%;
+  margin: 50px;
+}
+
+.pie-btn{
+  height: 4rem;
+  width: 13rem;
+  background-color: deepskyblue;
+  border: none;
+  border-radius: 45%;
+  margin: 50px;
+}
