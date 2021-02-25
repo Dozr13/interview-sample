@@ -18,7 +18,7 @@ CREATE TABLE expenses (
   id SERIAL PRIMARY KEY,
   due_date VARCHAR(200) NOT NULL,
   expense_title VARCHAR(50) NOT NULL,
-  amount INT NOT NULL,
+  amount NUMERIC NOT NULL,
   bill_type VARCHAR(30) NOT NULL,
   users_id INT REFERENCES bill_track_users (id) NOT NULL
 );

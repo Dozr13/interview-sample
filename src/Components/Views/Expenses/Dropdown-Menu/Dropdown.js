@@ -1,9 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Creatable, {makeCreatableSelect} from 'react-select/creatable'
 import './Dropdown.scss'
 
 
-function Dropdown() {
+const Dropdown = (props) => {
+
+  const [selectedOption, setSelectedOption] = useState({label: '', value: ''})
+
   const [options] = useState([
     {
       label: 'Mortgage',
@@ -53,12 +56,32 @@ function Dropdown() {
       label: 'Miscellaneous',
       value: 'Miscellaneous'
     }
-    
   ]);
+
+  useEffect(() => {
+    props.getValue(selectedOption.value)
+  }, [selectedOption.value])
+
+  const handleChange = (selectedOption) => {
+    setSelectedOption(selectedOption)
+    console.log(selectedOption)
+  }
+
+  // const setValue = () => (
+  //   <Object>
+  //     <select-option>{selectedOption}</select-option>
+  //   </Object>
+  // )
+
 
   return(
     <div className='selector'>
-      <Creatable placeholder='Expense Type' options={options}/>
+      <Creatable 
+        className='dropbox' 
+        placeholder='Expense Type' 
+        options={options} 
+        // value={selectedOption.value}
+        onChange={handleChange} />
     </div>
   )
 }

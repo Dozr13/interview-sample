@@ -1,10 +1,7 @@
 import React, {useContext, useState}  from 'react'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
-
 import Dropdown from './Dropdown-Menu/Dropdown'
 
-// import {AuthContext} from '../../Context/AuthContext'
-// import axios from 'axios'
 
 function Expenses() {
   const [dueDate, setDate] = useState('')
@@ -22,6 +19,8 @@ function Expenses() {
     setAmount('')
     setType('')
   }
+
+
 
 
   return (
@@ -51,8 +50,11 @@ function Expenses() {
         value={billType}
         onChange={(e) => setType(e.target.value)}
       /> */}
-
-      <Dropdown />
+      <div className='drop-down'>
+        <div className='center'>
+          <Dropdown value={Dropdown.selectedOption} getValue={setType} />
+        </div>
+      </div>
 
       <button onClick={createExpense}>Add Expense</button>
     </div>

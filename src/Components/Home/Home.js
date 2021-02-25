@@ -3,7 +3,6 @@ import {ExpenseContext} from '../../Context/ExpenseContext'
 import {Link} from 'react-router-dom'
 import './Home.scss'
 
-
 import DatePicker from '@hassanmojab/react-modern-calendar-datepicker';
 import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
 // import Calendar from 'react-modern-calendar-datepicker';
@@ -24,6 +23,7 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
     
   // }, [expenseCon])
 
+
   
   const dayHandler = (date) => {
     // console.log(date)
@@ -32,6 +32,11 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
     // setDueDate('')
   }
 
+    const readDay = (e) => {
+    expenseCon.expenses.map((b, i) => {
+      return <li key={i}>{b.dueDate}</li>
+    })
+  }
 
 
   return (
@@ -52,9 +57,7 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
       /> */}
 
       <ul>
-        {/* {expenseCon.expenses.map((b, i) => {
-          return <li key={i}>{b.dueDate}</li>
-        })} */}
+        {readDay}
       </ul>
 
 
