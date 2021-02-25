@@ -1,10 +1,18 @@
-
+#home-view{
+  height: 87vh;
+  width: 100vw;
+  margin: 0;
+}
 
 #chart-btns{
-  height: 85vh;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+}
+
+.calendar-box{
+  display: flex;
+  justify-content: center;
 }
 
 .graph-btn{

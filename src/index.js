@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter} from 'react-router-dom';
 import {AuthProvider} from './Context/AuthContext'
+import {ExpenseProvider} from './Context/ExpenseContext';
 
 import './index.scss';
 
@@ -11,7 +12,9 @@ ReactDOM.render(
   <React.StrictMode>
       <HashRouter>
         <AuthProvider>
-          <App />
+          <ExpenseProvider>
+            <App />
+          </ExpenseProvider>
         </AuthProvider>
       </HashRouter>
   </React.StrictMode>,

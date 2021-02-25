@@ -16,7 +16,7 @@ CREATE TABLE bill_track_users (
 
 CREATE TABLE expenses (
   id SERIAL PRIMARY KEY,
-  due_date DATE,
+  due_date VARCHAR(200) NOT NULL,
   expense_title VARCHAR(50) NOT NULL,
   amount INT NOT NULL,
   bill_type VARCHAR(30) NOT NULL,

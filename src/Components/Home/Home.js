@@ -1,37 +1,80 @@
-import React, {useContext, useEffect} from 'react'
-import {AuthContext} from '../../Context/AuthContext'
+import React, {useContext, useState, useEffect} from 'react'
+import {ExpenseContext} from '../../Context/ExpenseContext'
 import {Link} from 'react-router-dom'
 import './Home.scss'
-import axios from 'axios'
 
-function Home() {
-const userAuth = useContext(AuthContext)
-// console.log(userAuth)
 
-useEffect(() => {
-  if(!userAuth.user){
-    axios.get('/api/auth/me').then(({data}) => {
-      userAuth.setUser(data)
-    }).catch(err => (err))}
-}, [])
+import DatePicker from '@hassanmojab/react-modern-calendar-datepicker';
+import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
+// import Calendar from 'react-modern-calendar-datepicker';
+import 'react-modern-calendar-datepicker/lib/DatePicker.css';
+
+
+  function Home(props) {
+    
+    // const [userId, setUserId] = useState('')
+    // const [dueDate, setDueDate] = useState('')
+    
+    const [selectedDay, setSelectedDay] = useState('')
+
+    const expenseCon = useContext(ExpenseContext)
+
+
+  // useEffect(() => {
+    
+  // }, [expenseCon])
+
+  
+  const dayHandler = (date) => {
+    // console.log(date)
+    setSelectedDay(date)
+    expenseCon.readDay(date)
+    // setDueDate('')
+  }
+
 
 
   return (
-    <div className='bottom'>
 
-      <section id='chart-btns'>
+    <section id='home-view'>
+      <div className='calendar-box'>
+          <DatePicker
+            value={selectedDay}
+            onChange={(e) => dayHandler(e)}
+            />
+      </div>
 
-        <button className='graph-btn'>
-          <Link to="/graph">View Graph</Link>
-        </button>
+      {/* <input
+        type='date'
+        placeholder='Due Date'
+        value={dueDate}
+        onChange={(e) => dayHandler(e.target.value)}
+      /> */}
 
-        <button className='pie-btn'>
-          <Link to="/pie">View Pie Chart</Link>
-        </button>
+      <ul>
+        {/* {expenseCon.expenses.map((b, i) => {
+          return <li key={i}>{b.dueDate}</li>
+        })} */}
+      </ul>
 
-      </section>
 
-    </div>
+
+      <div className='bottom'>
+
+        <section id='chart-btns'>
+
+          <button className='graph-btn'>
+            <Link to="/graph">View Graph</Link>
+          </button>
+
+          <button className='pie-btn'>
+            <Link to="/pie">View Pie Chart</Link>
+          </button>
+
+        </section>
+
+      </div>
+    </section>
   )
 }
 

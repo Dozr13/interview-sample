@@ -2,48 +2,70 @@
   text-decoration: none;
 }
 
-#header {
-  height: 15vh;
+a {
+  font-weight: 700;
+}
+
+#header-bar {
+  height: 13vh;
   width: 100vw;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  /* opacity: 50%; */
-  background-color: orange;
+  justify-content: center;
+  background-color: #BADA55;
 }
 
-#logged-in {
+.header-logged-in {
+  height: 100%;
+  width: 100vw;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* ! Only a temp style to move the links down below the logout btn */
-.home-link {
-  font-size: 2rem;
-  color: aliceblue;
+.welcome-box {
+  height: 20%;
+  width: 35%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.welcome {
+  height: 100%;
+  width: 100%;
+  align-items: flex-start;
+  margin: 10px;
 }
 
 .title {
-  font-size: 5rem;
+  font-size: 2.5rem;
+  margin-bottom: -.5vh;
+}
+
+.home-link a {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #00CCC0;
+  justify-self: flex-start;
 }
 
 .month-link {
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .week-link {
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .day-link {
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 #logout-btn {
   position: absolute;
   top: 0;
   right: 0;
-  /* margin-top: 30px; */
-  /* margin-right: ; */
+  margin: 10px;
 }
 
 .logout-style {
@@ -51,5 +73,14 @@
   width: 70px;
   background-color: lightblue;
   border-radius: 13px;
+}
+
+.header-logged-out {
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #141fad;
 }
 /*# sourceMappingURL=Header.css.map */

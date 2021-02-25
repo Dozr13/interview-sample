@@ -21,14 +21,39 @@ module.exports = {
     }
   },
 
+  readDayExpense: async (req, res) => {
+    // console.log('click', req.body)
+    const {id} = req.session.user
+    const {dueDate} = req.body
+    const db = req.app.get('db')
+    if (dueDate){
+      if(dueDate.day <= 9){
+        dueDate.day = `0${dueDate.day}`
+      } 
+      if(dueDate.month <= 9){
+        dueDate.month = `0${dueDate.month}`
+      } 
+      const date = `${dueDate.year}-${dueDate.month}-${dueDate.day}`
+      // console.log(date, typeof date)
+      db.expenses.read_day_expenses(id, date)
+        .then(expenses => res.status(200).send(expenses))
+        .catch(errMsg => console.log(errMsg))
+    }
+  },
+
+  // 2021-02-23T17:00:00.000-07:00
+
   // Passes Postman tests
   createExpense: (req, res) => {
-    // console.log('make')
+    // console.log('create', req.body)
+
     const db = req.app.get('db')
     const {id} = req.session.user
     const {dueDate, expenseTitle, amount, billType} = req.body
+    // console.log(dueDate)
     if(id){
-      db.expenses.create_expense([new Date(dueDate), expenseTitle, amount, billType, id])
+      console.log(dueDate, typeof dueDate)
+      db.expenses.create_expense([dueDate, expenseTitle, amount, billType, id])
         .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
         .catch(errMsg => console.log(errMsg))
     }

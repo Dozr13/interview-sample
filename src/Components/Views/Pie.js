@@ -3,15 +3,14 @@ import {AuthContext} from '../../Context/AuthContext'
 import axios from 'axios'
 
 function Pie() {
-  const userAuth = useContext(AuthContext)
+  // const userAuth = useContext(AuthContext)
 
-    
-  useEffect(() => {
-    if(!userAuth.user){
-      axios.get('/api/auth/me').then(({data}) => {
-        userAuth.setUser(data)
-      }).catch(err => console.log(err))}
-    }, [])
+  // useEffect(() => {
+  //   if(!userAuth.user){
+  //     axios.get('/api/auth/me').then(({data}) => {
+  //       userAuth.setUser(data)
+  //     }).catch(err => console.log(err))}
+  //   }, [])
 
       return (
     <div>

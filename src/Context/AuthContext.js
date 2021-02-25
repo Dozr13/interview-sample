@@ -11,7 +11,7 @@ export const AuthProvider = (props) => {
   
   const login = (email, password) => {
     axios.post('/api/auth/login', {email, password}).then(({data}) => {
-      console.log(data)
+      // console.log(data)
       setUser(data)
       push('/home')
     })

@@ -16,29 +16,26 @@ function Header(props) {
 
 
 
-  const ifLoggedInHeader = () => {
+  const loggedInHeader = () => {
   return (
   <section className='header-logged-in'>
-    <div className='welcome'>
-      Welcome, {userAuth.user.firstName}
-    </div>
-    <div className='home-link'>
-      <Link to="/home">Home</Link>
-    </div>
+    <section className='welcome-box'>
+      <div className='welcome'>
+        Welcome {userAuth.user.firstName}!
+      </div>
+    </section>
 
     <h1 className='title'>Bill Track</h1>
 
-    <div className='month-link'>
-      <Link to="/month">Month</Link>
-    </div>
+    <section className='link-bar'>
+      <div className='home-link'>
+        <Link to="/home">Home</Link>
+      </div>
 
-    <div className='week-link'>
-      <Link to="/week">Week</Link>
-    </div>
-
-    <div className='day-link'>
-      <Link to="/day">Day</Link>
-    </div>
+      <div className='expenses-link'>
+        <Link to="/expenses">Expenses</Link>
+      </div>
+    </section>
 
     <section id='logout-btn'>
       <button
@@ -52,6 +49,16 @@ function Header(props) {
   )}
 
 
+  const loggedOutHeader = () => {
+    return (
+      <div>
+        <h3>Welcome to</h3>
+        <h1 className='title'>Bill Track</h1>
+      </div>
+    )
+  }
+
+
   return (
     
     <div id='header-bar'>
@@ -59,10 +66,10 @@ function Header(props) {
 
       <section className='header-logged-out'>
         {!userAuth.user &&
-        <h1 className='title'>Bill Track</h1>
+          loggedOutHeader()
         }
         {userAuth.user &&
-          ifLoggedInHeader()
+          loggedInHeader()
         }
       </section>
 
