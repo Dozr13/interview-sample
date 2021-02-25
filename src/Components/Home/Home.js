@@ -3,10 +3,6 @@ import {ExpenseContext} from '../../Context/ExpenseContext'
 import {Link} from 'react-router-dom'
 import './Home.scss'
 
-import DatePicker from '@hassanmojab/react-modern-calendar-datepicker';
-import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
-// import Calendar from 'react-modern-calendar-datepicker';
-import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 
 
   function Home(props) {
@@ -14,9 +10,7 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
     // const [userId, setUserId] = useState('')
     // const [dueDate, setDueDate] = useState('')
     
-    const [selectedDay, setSelectedDay] = useState('')
 
-    const expenseCon = useContext(ExpenseContext)
 
 
   // useEffect(() => {
@@ -24,30 +18,10 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
   // }, [expenseCon])
 
 
-  
-  const dayHandler = (date) => {
-    // console.log(date)
-    setSelectedDay(date)
-    expenseCon.readDay(date)
-    // setDueDate('')
-  }
-
-    const readDay = (e) => {
-    expenseCon.expenses.map((b, i) => {
-      return <li key={i}>{b.dueDate}</li>
-    })
-  }
-
-
   return (
 
+
     <section id='home-view'>
-      <div className='calendar-box'>
-          <DatePicker
-            value={selectedDay}
-            onChange={(e) => dayHandler(e)}
-            />
-      </div>
 
       {/* <input
         type='date'
@@ -56,9 +30,6 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
         onChange={(e) => dayHandler(e.target.value)}
       /> */}
 
-      <ul>
-        {readDay}
-      </ul>
 
 
 

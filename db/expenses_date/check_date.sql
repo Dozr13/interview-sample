@@ -1,0 +1,1 @@
+SELECT * FROM expenses_date WHERE due_date = $1;

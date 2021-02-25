@@ -14,11 +14,27 @@ CREATE TABLE bill_track_users (
   background_id INT REFERENCES backgrounds (id)
 );
 
+
+CREATE TABLE expenses_date (
+  id SERIAL PRIMARY KEY,
+  due_date VARCHAR(200) NOT NULL
+);
+
 CREATE TABLE expenses (
   id SERIAL PRIMARY KEY,
-  due_date VARCHAR(200) NOT NULL,
-  expense_title VARCHAR(50) NOT NULL,
+  expense_title VARCHAR(200) NOT NULL,
   amount NUMERIC NOT NULL,
-  bill_type VARCHAR(30) NOT NULL,
+  bill_type VARCHAR(200) NOT NULL,
   users_id INT REFERENCES bill_track_users (id) NOT NULL
 );
+
+CREATE TABLE expenses_junction (
+  id SERIAL PRIMARY KEY,
+  expenses_date_id INT REFERENCES expenses_date (id) NOT NULL,
+  expenses_id INT REFERENCES expenses (id) NOT NULL
+);
+
+
+-- ! RESEARCH CASCADING TO DELETE FROM EXPENSE DATE TABLE TO EXPENSE
+
+-- ! POSTGRES CASCADE DELETE FOREIGN KEY

@@ -2,7 +2,6 @@ let errMsg = "Oops! Something went wrong. Our engineers have been informed and w
 
 module.exports = {
   readExpenses: async (req, res) => {
-    // console.log(req)
     const {id} = req.session.user;
     const {start, end} = req.body;
     const db = await req.app.get('db')
@@ -34,7 +33,7 @@ module.exports = {
         dueDate.month = `0${dueDate.month}`
       } 
       const date = `${dueDate.year}-${dueDate.month}-${dueDate.day}`
-      // console.log(date, typeof date)
+      console.log(date, typeof date)
       db.expenses.read_day_expenses(id, date)
         .then(expenses => res.status(200).send(expenses))
         .catch(errMsg => console.log(errMsg))
@@ -44,18 +43,23 @@ module.exports = {
   // 2021-02-23T17:00:00.000-07:00
 
   // Passes Postman tests
-  createExpense: (req, res) => {
+  createExpense: async (req, res) => {
     // console.log('create', req.body)
-
     const db = req.app.get('db')
     const {id} = req.session.user
     const {dueDate, expenseTitle, amount, billType} = req.body
-    // console.log(dueDate)
-    if(id){
-      console.log(dueDate, typeof dueDate)
-      db.expenses.create_expense([dueDate, expenseTitle, amount, billType, id])
-        .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
-        .catch(errMsg => console.log(errMsg))
+      const [checkDate] = await db.expenses_date.check_date(dueDate)
+      if(checkDate){
+        const [expense] = await db.expenses.create_expense([expenseTitle, amount, billType, id])
+      console.log('if', checkDate.id, expense.id)
+        await db.expense_junction.create_expense_junction([checkDate.id, expense.id])
+        res.sendStatus(200)
+      } else {
+        const [checkDate] = await db.expenses_date.create_date([dueDate])
+        const [expense] = await db.expenses.create_expense([expenseTitle, amount, billType, id])
+      console.log('else', checkDate.id, expense.id)
+        await db.expense_junction.create_expense_junction([checkDate.id, expense.id])
+        res.sendStatus(200)
     }
   },
 
@@ -65,12 +69,12 @@ module.exports = {
     const {dueDate, expenseTitle, amount, billType} = req.body
     const bill = await req.app.get('db').expenses.read_expense([req.params.id, req.session.user.id])[0]
     // let newBill = [due_date: due_date || bill.due_date, expense_title: expense_title || bill.expense_title, amount: amount || bill.amount, bill_type: bill_type || bill.bill_type]
-    let dd = dueDate || bill.dueDate
-    let et = expenseTitle || bill.expenseTitle
-    let am = amount || bill.amount
-    let bt = billType || bill.billType
+    let date = dueDate || bill.dueDate
+    let title = expenseTitle || bill.expenseTitle
+    let price = amount || bill.amount
+    let type = billType || bill.billType
     // console.log(newBill)
-    req.app.get('db').expenses.edit_expense ([new Date(dd), et, am, bt, req.params.id, req.session.user.id]) 
+    req.app.get('db').expenses.edit_expense ([new Date(date), title, price, type, req.params.id, req.session.user.id]) 
     .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
     .catch(errMsg => console.log(errMsg))
   },

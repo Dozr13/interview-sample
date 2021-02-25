@@ -2,6 +2,11 @@ import React, {useContext, useState}  from 'react'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
 import Dropdown from './Dropdown-Menu/Dropdown'
 
+import DatePicker from '@hassanmojab/react-modern-calendar-datepicker';
+import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
+
+import TableView from './Table/TableView'
+
 
 function Expenses() {
   const [dueDate, setDate] = useState('')
@@ -9,7 +14,10 @@ function Expenses() {
   const [amount, setAmount] = useState('')
   const [billType, setType] = useState('')
 
+  const [selectedDay, setSelectedDay] = useState('')
+
   const userExpense = useContext(ExpenseContext)
+
 
   const createExpense = (e) => {
     // e.preventDefault()
@@ -20,12 +28,39 @@ function Expenses() {
     setType('')
   }
 
+  const dayHandler = (date) => {
+    setSelectedDay(date)
+    userExpense.readDay(date)
+  }
 
-
+  // const readDay = (e) => {
+  //   userExpense.expenses.map((b, i) => {
+  //     return <li key={i}>{b.dueDate}</li>
+  //   })
+  // }
 
   return (
     <div>
       This is the Expenses Component!
+
+
+      <div className='calendar-box'>
+          <DatePicker
+            value={selectedDay}
+            onChange={(e) => dayHandler(e)}
+            />
+      </div>
+
+      <div>
+        <TableView />
+      </div>
+
+      {/* <ul>
+        {readDay}
+      </ul> */}
+
+
+
       <input
         type='date'
         placeholder='Due Date'
