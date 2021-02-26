@@ -1,5 +1,6 @@
-import React, {useContext, useState}  from 'react'
+import React, {useContext, useState, useEffect}  from 'react'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
+import {AuthContext} from '../../../Context/AuthContext'
 import Dropdown from './Dropdown-Menu/Dropdown'
 
 import DatePicker from '@hassanmojab/react-modern-calendar-datepicker';
@@ -13,31 +14,62 @@ function Expenses() {
   const [expenseTitle, setTitle] = useState('')
   const [amount, setAmount] = useState('')
   const [billType, setType] = useState('')
-
+  
+  // const defaultValue = {
+  //   year: 2021,
+  //   month: 2,
+  //   day: 11,
+  // };
   const [selectedDay, setSelectedDay] = useState('')
 
   const userExpense = useContext(ExpenseContext)
 
+  useEffect(() => {
+    const date = {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDay() + 1}
+    console.log(date, 'useEffect')
+    userExpense.readDay(date)
+  }, [])
+
 
   const createExpense = (e) => {
-    // e.preventDefault()
-    userExpense.createExpense(dueDate, expenseTitle, amount, billType)
+    const date = new Date(dueDate)
+    userExpense.createExpense({year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDay() + 1}, expenseTitle, amount, billType)
     setDate('')
     setTitle('')
     setAmount('')
     setType('')
   }
 
-  const dayHandler = (date) => {
-    setSelectedDay(date)
-    userExpense.readDay(date)
+  const dayHandler = (dueDate) => {
+    // console.log('readDay func', dueDate)
+    setSelectedDay(dueDate)
+    userExpense.readDay(dueDate)
   }
 
-  // const readDay = (e) => {
-  //   userExpense.expenses.map((b, i) => {
-  //     return <li key={i}>{b.dueDate}</li>
-  //   })
-  // }
+
+
+
+
+
+  const renderCustomInput = ({ ref }) => (
+    <input
+      readOnly
+      ref={ref} // necessary
+      placeholder="Click Here for Calendar!"
+      value={selectedDay ? `${selectedDay.month}: ${selectedDay.day}` : ''}
+      style={{
+        textAlign: 'center',
+        padding: '1rem 1.5rem',
+        fontSize: '1rem',
+        border: '1px solid #9c88ff',
+        borderRadius: '100px',
+        boxShadow: '0 1.5rem 2rem rgba(156, 136, 255, 0.2)',
+        color: '#9c88ff',
+        outline: 'none',
+      }}
+      className="my-custom-input-class" // a styling class
+    />
+  )
 
   return (
     <div>
@@ -48,6 +80,11 @@ function Expenses() {
           <DatePicker
             value={selectedDay}
             onChange={(e) => dayHandler(e)}
+            renderInput={renderCustomInput}
+            colorPrimary="#9c88ff" 
+            calendarClassName="custom-calendar"
+            calendarTodayClassName="custom-today-day" 
+            shouldHighlightWeekends
             />
       </div>
 
@@ -73,10 +110,11 @@ function Expenses() {
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
-        type='number'
+        type='text'
+        pattern='[0-9]*'
         placeholder='Amount'
         value={amount}
-        onChange={(e) => setAmount(e.target.value)}
+        onInput={(e) => setAmount(e.target.value)}
       />
 
 

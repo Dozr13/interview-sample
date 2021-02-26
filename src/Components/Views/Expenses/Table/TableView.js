@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,6 +14,29 @@ function TableView() {
 
   const userExpense = useContext(ExpenseContext)
 
+
+  const [tableMap, setTableMap] = useState([])
+  const [tableReduce, setTableReduce] = useState('')
+
+  useEffect(() => {
+    console.log('1st use', userExpense.expenses)
+  setTableMap (userExpense.expenses.map((e, i) => {
+    return <TableRow key={i}>
+      <TableCell align='center'>{e.due_date}</TableCell>
+      <TableCell align='center'>{e.expense_title}</TableCell>
+      <TableCell align='center'>{e.bill_type}</TableCell>
+      <TableCell align='center'>{e.amount}</TableCell>
+    </TableRow>
+    
+  }))
+}, [userExpense])
+  
+  // useEffect(() => {
+  //   console.log('reduce', userExpense.expenses)
+  //   setTableReduce(userExpense.expenses.reduce((total, current) => {
+  //     return total += current.amount
+  //   }, 0))
+  // }, [userExpense])
 
 // console.log(userExpense.expenses)
 
@@ -32,17 +55,10 @@ function TableView() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {userExpense.expenses.map((e, i) => {
-            return <TableRow key={i}>
-              <TableCell align='center'>{e.due_date}</TableCell>
-              <TableCell align='center'>{e.expense_title}</TableCell>
-              <TableCell align='center'>{e.bill_type}</TableCell>
-              <TableCell align='center'>{e.amount}</TableCell>
-            </TableRow>
-          })}
+          {tableMap}
           <TableRow>
             <TableCell colSpan={3} align='right'>Total</TableCell>
-            <TableCell align='center'>{userExpense.expenses.reduce((total, current) => total += +current.amount, 0)}</TableCell>
+            <TableCell align='center'>{tableReduce}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
