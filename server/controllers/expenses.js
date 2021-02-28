@@ -8,11 +8,15 @@ module.exports = {
     const db = req.app.get('db')
     const {id} = req.session.user
     const {dueDate, expenseTitle, amount, billType} = req.body
-    const date = new Date(`${dueDate.year}-${dueDate.month}-${dueDate.day}`)
+    // const date = new Date(`${dueDate.year}-${dueDate.month}-${dueDate.day}`)
+    const {format} = require('date-fns');
+    //today's date
+    const date = format(new Date(),'yyyy-MM-dd');
+  console.log(date, dueDate, 'date-fns');
     const [checkDate] = await db.expenses_date.check_date(date)
       if(checkDate){
         const [expense] = await db.expenses.create_expense([expenseTitle, amount, billType, id])
-      console.log('if', checkDate, expense, typeof amount)
+      console.log('if', checkDate, expense)
         if (await db.expense_junction.create_expense_junction([checkDate.id, expense.id]))
         res.sendStatus(200)
         else(res.sendStatus(500))

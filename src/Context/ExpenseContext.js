@@ -10,10 +10,10 @@ export const ExpenseProvider = (props) => {
 
   const createExpense = (dueDate, expenseTitle, amount, billType) => {
     axios.post('/api/new-expense', {dueDate, expenseTitle, amount, billType}).then(({data}) => {
-      console.log(dueDate, 'createExpenseTest outter')
-      axios.post('/api/read-day', {dueDate}).then(({data}) => {
-        console.log('create context', data)
-        setExpense(data)
+      // console.log('createExpenseTest outer', dueDate)
+      axios.post('/api/read-day', {dueDate}).then(({res}) => {
+        // console.log('create context', data)
+        setExpense(res.data)
       }).catch(err => console.log('createExpenseTest inner .catch', dueDate))
       // for(let e in data){
       //   console.log(e, typeof e)
@@ -21,6 +21,7 @@ export const ExpenseProvider = (props) => {
       setExpense(data)
     }).catch(err => console.log(dueDate))
   }
+
 
   const readDay = (dueDate) => {
     axios.post('/api/read-day', {dueDate}).then((res) => {

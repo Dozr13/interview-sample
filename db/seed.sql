@@ -33,8 +33,3 @@ CREATE TABLE expenses_junction (
   expenses_date_id INT REFERENCES expenses_date (id) NOT NULL,
   expenses_id INT REFERENCES expenses (id) NOT NULL
 );
-
-
--- ! RESEARCH CASCADING TO DELETE FROM EXPENSE DATE TABLE TO EXPENSE
-
--- ! POSTGRES CASCADE DELETE FOREIGN KEY

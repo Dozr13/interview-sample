@@ -2,11 +2,14 @@ import React, {useContext, useState, useEffect}  from 'react'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
 import {AuthContext} from '../../../Context/AuthContext'
 import Dropdown from './Dropdown-Menu/Dropdown'
+import Select from 'react-select'
 
 import DatePicker from '@hassanmojab/react-modern-calendar-datepicker';
 import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
 
 import TableView from './Table/TableView'
+
+import format from 'date-fns/format'
 
 
 function Expenses() {
@@ -14,27 +17,23 @@ function Expenses() {
   const [expenseTitle, setTitle] = useState('')
   const [amount, setAmount] = useState('')
   const [billType, setType] = useState('')
-  
-  // const defaultValue = {
-  //   year: 2021,
-  //   month: 2,
-  //   day: 11,
-  // };
+  // Bill Date selector to see specific dates
   const [selectedDay, setSelectedDay] = useState('')
 
   const userExpense = useContext(ExpenseContext)
 
   useEffect(() => {
     const date = {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDay() + 1}
-    console.log(date, 'useEffect')
+    console.log('useEffect Expenses.js', date)
     userExpense.readDay(date)
   }, [])
 
 
   const createExpense = (e) => {
-    const date = new Date(dueDate)
-    userExpense.createExpense({year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDay() + 1}, expenseTitle, amount, billType)
-    setDate('')
+    const date = format(new Date(), 'yyyy-MM-dd')
+    userExpense.createExpense(date, expenseTitle, amount, billType)
+    // console.log('date Expense.js--', date, selectedDay)
+    setDate(selectedDay)
     setTitle('')
     setAmount('')
     setType('')
@@ -52,6 +51,8 @@ function Expenses() {
 
 
   const renderCustomInput = ({ ref }) => (
+    console.log('wrong date????', dueDate),
+
     <input
       readOnly
       ref={ref} // necessary
@@ -91,12 +92,6 @@ function Expenses() {
       <div>
         <TableView />
       </div>
-
-      {/* <ul>
-        {readDay}
-      </ul> */}
-
-
 
       <input
         type='date'

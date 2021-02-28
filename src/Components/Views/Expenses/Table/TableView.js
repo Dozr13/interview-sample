@@ -1,4 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
+
+import {ExpenseContext} from '../../../../Context/ExpenseContext'
+
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,19 +10,21 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {ExpenseContext} from '../../../../Context/ExpenseContext'
 
-function TableView() {
+
+function TableView(props) {
   const useStyles = makeStyles({table: {maxWidth: 700}})
 
   const userExpense = useContext(ExpenseContext)
 
 
   const [tableMap, setTableMap] = useState([])
-  const [tableReduce, setTableReduce] = useState('')
-
+  const [tableReduce, setTableReduce] = useState([])
+  
+  userExpense.expenses = Array.from(userExpense.expenses)
+  
   useEffect(() => {
-    console.log('1st use', userExpense.expenses)
+    console.log('1st useEffect on Table', typeof userExpense.expenses)
   setTableMap (userExpense.expenses.map((e, i) => {
     return <TableRow key={i}>
       <TableCell align='center'>{e.due_date}</TableCell>
@@ -27,9 +32,10 @@ function TableView() {
       <TableCell align='center'>{e.bill_type}</TableCell>
       <TableCell align='center'>{e.amount}</TableCell>
     </TableRow>
-    
   }))
 }, [userExpense])
+
+
   
   // useEffect(() => {
   //   console.log('reduce', userExpense.expenses)
