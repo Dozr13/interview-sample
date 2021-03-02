@@ -41,7 +41,7 @@ app.post('/api/new-expense', auth.userOnly, ctrlExpense.createExpense)
 app.post('/api/read-day', auth.userOnly, ctrlExpense.readDayExpense)
 app.put('/api/edit-expense/:id', auth.userOnly, ctrlExpense.editExpense)
 app.get('/api/expense/:id', auth.userOnly, ctrlExpense.readExpense)
-app.delete('/api/expense/:id', auth.userOnly, ctrlExpense.deleteExpense) 
+app.delete('/api/expense/:id/:due_date', auth.userOnly, ctrlExpense.deleteExpense) 
 
 // We're listening
 app.listen(SERVER_PORT, _ => console.log(`Hi! I'm your server and I'm listening on port: ${SERVER_PORT}! This is so exciting!!!`))

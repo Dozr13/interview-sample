@@ -11,60 +11,69 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import format from 'date-fns/format'
+
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+
 
 function TableView(props) {
   const useStyles = makeStyles({table: {maxWidth: 700}})
 
   const userExpense = useContext(ExpenseContext)
-
+  const amount = userExpense.expenses.amount
 
   const [tableMap, setTableMap] = useState([])
   const [tableReduce, setTableReduce] = useState([])
   
   userExpense.expenses = Array.from(userExpense.expenses)
+
+
   
   useEffect(() => {
-    console.log('1st useEffect on Table', typeof userExpense.expenses)
-  setTableMap (userExpense.expenses.map((e, i) => {
-    return <TableRow key={i}>
+    setTableMap (userExpense.expenses.map((e, i) => {
+      // console.log(e)
+      // const date = format(e.due_date, 'yyyy-MM-dd')
+      return <TableRow key={i}>
       <TableCell align='center'>{e.due_date}</TableCell>
       <TableCell align='center'>{e.expense_title}</TableCell>
       <TableCell align='center'>{e.bill_type}</TableCell>
       <TableCell align='center'>{e.amount}</TableCell>
+
+      <TableCell align='center' onClick={() => userExpense.deleteExpense(e.id, e.due_date)}><DeleteForeverIcon /></TableCell>
     </TableRow>
   }))
 }, [userExpense])
 
-
   
-  // useEffect(() => {
-  //   console.log('reduce', userExpense.expenses)
-  //   setTableReduce(userExpense.expenses.reduce((total, current) => {
-  //     return total += current.amount
-  //   }, 0))
-  // }, [userExpense])
+  useEffect(() => {
+    setTableReduce(userExpense.expenses.reduce((total, current) => {
+      return total += +current.amount
+    }, 0))
+  }, [userExpense])
 
-// console.log(userExpense.expenses)
 
   return (
     <TableContainer component={Paper}>
       <Table className={useStyles().table} aria-label='spanning table' align='center'>
         <TableHead>
           <TableRow>
-            <TableCell align='center' colSpan={4}>Details</TableCell>
+            <TableCell align='center' colSpan={5}>Details</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell align='center'>Date Due</TableCell>
-            <TableCell align='center'>Title</TableCell>
-            <TableCell align='center'>Bill Type</TableCell>
-            <TableCell align='center'>Amount</TableCell>
+            <TableCell align='center' style={{fontSize: 18}}>Date Due</TableCell>
+            <TableCell align='center' style={{fontSize: 18}}>Title</TableCell>
+            <TableCell align='center' style={{fontSize: 18}}>Bill Type</TableCell>
+            <TableCell align='center' style={{fontSize: 18}}>Amount</TableCell>
+            <TableCell align='center' style={{fontSize: 18}}>Options</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {tableMap}
           <TableRow>
-            <TableCell colSpan={3} align='right'>Total</TableCell>
-            <TableCell align='center'>{tableReduce}</TableCell>
+            <TableCell colSpan={3} align='right' style={{fontSize: 28}}>Total:</TableCell>
+            <TableCell align='center' style={{fontSize: 28}}>{tableReduce}</TableCell>
           </TableRow>
         </TableBody>
       </Table>

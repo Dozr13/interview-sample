@@ -9,7 +9,7 @@ import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
 
 import TableView from './Table/TableView'
 
-import format from 'date-fns/format'
+// import format from 'date-fns/format'
 
 
 function Expenses() {
@@ -23,17 +23,18 @@ function Expenses() {
   const userExpense = useContext(ExpenseContext)
 
   useEffect(() => {
-    const date = {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDay() + 1}
-    console.log('useEffect Expenses.js', date)
-    userExpense.readDay(date)
+    const curr = new Date()
+    
+    console.log('useEffect Expenses.js', curr)
+    userExpense.readDay(curr)
   }, [])
 
 
   const createExpense = (e) => {
-    const date = format(new Date(), 'yyyy-MM-dd')
-    userExpense.createExpense(date, expenseTitle, amount, billType)
-    // console.log('date Expense.js--', date, selectedDay)
-    setDate(selectedDay)
+    // const date = format(new Date(), 'yyyy-MM-dd')
+    userExpense.createExpense(dueDate, expenseTitle, amount, billType)
+    // console.log('date Expense.js--', dueDate, selectedDay)
+    setDate('')
     setTitle('')
     setAmount('')
     setType('')
@@ -46,12 +47,7 @@ function Expenses() {
   }
 
 
-
-
-
-
   const renderCustomInput = ({ ref }) => (
-    console.log('wrong date????', dueDate),
 
     <input
       readOnly
@@ -74,8 +70,6 @@ function Expenses() {
 
   return (
     <div>
-      This is the Expenses Component!
-
 
       <div className='calendar-box'>
           <DatePicker

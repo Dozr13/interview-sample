@@ -1,61 +1,42 @@
 let errMsg = "Oops! Something went wrong. Our engineers have been informed and will get the issue patched up right away, thank you for your patience!"
 
 module.exports = {
-  // Passes Postman tests
+  // ! Used in Expense.js
   createExpense: async (req, res) => {
-    console.log('create', req.body)
     try {
     const db = req.app.get('db')
     const {id} = req.session.user
     const {dueDate, expenseTitle, amount, billType} = req.body
-    // const date = new Date(`${dueDate.year}-${dueDate.month}-${dueDate.day}`)
-    const {format} = require('date-fns');
-    //today's date
-    const date = format(new Date(),'yyyy-MM-dd');
-  console.log(date, dueDate, 'date-fns');
-    const [checkDate] = await db.expenses_date.check_date(date)
+    const [checkDate] = await db.expenses_date.check_date(dueDate)
+    console.log({checkDate})
       if(checkDate){
         const [expense] = await db.expenses.create_expense([expenseTitle, amount, billType, id])
-      console.log('if', checkDate, expense)
-        if (await db.expense_junction.create_expense_junction([checkDate.id, expense.id]))
-        res.sendStatus(200)
-        else(res.sendStatus(500))
-      } else {
-        const [checkDate] = await db.expenses_date.create_date([date])
-        const [expense] = await db.expenses.create_expense([expenseTitle, amount, billType, id])
-        console.log('test ctrl', checkDate, expense)
-      console.log('else', checkDate.id, expense.id, typeof amount)
-        if(await db.expense_junction.create_expense_junction([checkDate.id, expense.id]))
-        res.sendStatus(200)
-        else(res.sendStatus(500))
-    }} catch(error){
-      console.log(error)
-    }
-  },
-
-  readExpenses: async (req, res) => {
-    const {id} = req.session.user;
-    const {start, end} = req.body;
-    const db = await req.app.get('db')
-    if (start && end){
-      db.expenses.read_all_expenses_date(id, start, end)
-      .then(expenses => res.status(200).send(expenses))
-        .catch(errMsg => console.log(errMsg))
-    } else if (start){
-      db.expenses.read_all_expenses_date(id, start, Date.now())
-        .then(expenses => res.status(200).send(expenses))
-        .catch(errMsg => console.log(errMsg))
-    } else {
-      db.expenses.read_all_expenses(id)
-        .then(expenses => res.status(200).send(expenses))
-        .catch(errMsg => console.log(errMsg))
-    }
-  },
-
+        console.log({expense})
+        await db.expense_junction.create_expense_junction(checkDate.id, expense.id)
+         const expenses = await db.expenses.read_day_expenses(req.session.user.id, dueDate)
+console.log('create expenses ctrl') 
+console.log(expenses)
+            res.status(200).send(expenses)
+        } else {
+          const [checkDate] = await db.expenses_date.create_date(dueDate)
+          const [expense] = await db.expenses.create_expense([expenseTitle, amount, billType, id])
+console.log({expense})
+          await db.expense_junction.create_expense_junction(checkDate.id, expense.id)
+           const expenses = await db.expenses.read_day_expenses(req.session.user.id, dueDate)
+           res.status(200).send(expenses)
+        }} 
+        catch(err) {
+          console.log(err)
+          res.status(500).send(err)
+        }},
+  
+  
+  // ! Used to display expenses of selected date
   readDayExpense: async (req, res) => {
     // console.log('click', req.body)
     const {id} = req.session.user
     const {dueDate} = req.body
+console.log(dueDate)
     const db = req.app.get('db')
     if (dueDate){
       if(dueDate.day <= 9){
@@ -65,21 +46,58 @@ module.exports = {
         dueDate.month = `0${dueDate.month}`
       } 
       const date = `${dueDate.year}-${dueDate.month}-${dueDate.day}`
-    // console.log('isItString', id, date, typeof date)
+      // console.log('isItString', id, date, typeof date)
       db.expenses.read_day_expenses(id, date)
+      .then(expenses => {
+console.log('read expenses ctrl', expenses) 
+        res.status(200).send(expenses)
+      })
+      .catch(errMsg => console.log(errMsg))
+    }
+  },
+  
+  // ! Used in TableView.js to delete expenses from db
+  deleteExpense: (req, res) => {
+    const db = req.app.get('db')
+// console.log(req.params, req.session.user)
+    db.expenses.delete_expense([req.params.id, req.session.user.id])
+      .then(_ => {
+        db.expenses.read_day_expenses(req.session.user.id, req.params.due_date)
         .then(expenses => {
-          // console.log('expenses ctrl', expenses) 
+console.log('delete expenses ctrl', expenses) 
           res.status(200).send(expenses)
         })
+        .catch(errMsg => console.log(errMsg))
+      })
+      .catch(errMsg => console.log(errMsg))
+  },
+  
+
+
+
+
+
+    readExpenses: async (req, res) => {
+      const {id} = req.session.user;
+      const {start, end} = req.body;
+      const db = await req.app.get('db')
+      if (start && end){
+        db.expenses.read_all_expenses_date(id, start, end)
+        .then(expenses => res.status(200).send(expenses))
+        .catch(errMsg => console.log(errMsg))
+      } else if (start){
+        db.expenses.read_all_expenses_date(id, start, Date.now())
+        .then(expenses => res.status(200).send(expenses))
+        .catch(errMsg => console.log(errMsg))
+    } else {
+      db.expenses.read_all_expenses(id)
+        .then(expenses => res.status(200).send(expenses))
         .catch(errMsg => console.log(errMsg))
     }
   },
 
-  // 2021-02-23T17:00:00.000-07:00
-
 
   // Passes Postman test
-  // ! Later edit if 1 item is left blank, currently throws typeError.
   editExpense: async (req, res) => {
     const {dueDate, expenseTitle, amount, billType} = req.body
     const bill = await req.app.get('db').expenses.read_expense([req.params.id, req.session.user.id])[0]
@@ -102,10 +120,4 @@ module.exports = {
       .catch(errMsg => console.log(errMsg))
   },
 
-  // Passes Postman tests
-  deleteExpense: (req, res) => {
-    req.app.get('db').expenses.delete_expense([req.params.id, req.session.user.id])
-      .then(_ => res.sendStatus(200))
-      .catch(errMsg => console.log(errMsg))
-  }
 }

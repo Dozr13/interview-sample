@@ -1,2 +1,2 @@
-DELETE FROM expenses
-WHERE id = $1 AND users_id = $2;
+DELETE FROM expenses_junction
+WHERE id = $1;
