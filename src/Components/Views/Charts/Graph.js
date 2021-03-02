@@ -1,8 +1,8 @@
 import React, {useContext, useEffect} from 'react'
-import {AuthContext} from '../../Context/AuthContext'
+import {AuthContext} from '../../../Context/AuthContext'
 import axios from 'axios'
 
-function Pie() {
+function Graph() {
   // const userAuth = useContext(AuthContext)
 
   // useEffect(() => {
@@ -10,13 +10,17 @@ function Pie() {
   //     axios.get('/api/auth/me').then(({data}) => {
   //       userAuth.setUser(data)
   //     }).catch(err => console.log(err))}
-  //   }, [])
+  // }, [])
 
-      return (
+  return (
     <div>
-      This is the Pie component! Also bound to use Chart.js!      
+      This is the Graph Component! Bound to include Chart.js      
+
+
+      <h1>DISPLAY THIS PAGE AFTER LOGIN</h1>
     </div>
   )
 }
 
-export default Pie
+
+export default Graph

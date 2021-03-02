@@ -36,11 +36,11 @@ app.get('/api/auth/me', ctrlUser.getUser)
 app.post('/api/auth/logout', ctrlUser.logout)
 
 // Expense Endpoints
-app.get('/api/expenses-data', auth.userOnly, ctrlExpense.readExpenses)
-app.post('/api/new-expense', auth.userOnly, ctrlExpense.createExpense)
 app.post('/api/read-day', auth.userOnly, ctrlExpense.readDayExpense)
+
+app.post('/api/new-expense', auth.userOnly, ctrlExpense.createExpense)
+app.get('/api/expenses-range', auth.userOnly, ctrlExpense.readRangeExpenses)
 app.put('/api/edit-expense/:id', auth.userOnly, ctrlExpense.editExpense)
-app.get('/api/expense/:id', auth.userOnly, ctrlExpense.readExpense)
 app.delete('/api/expense/:id/:due_date', auth.userOnly, ctrlExpense.deleteExpense) 
 
 // We're listening

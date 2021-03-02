@@ -77,7 +77,7 @@ console.log('delete expenses ctrl', expenses)
 
 
 
-    readExpenses: async (req, res) => {
+    readRangeExpenses: async (req, res) => {
       const {id} = req.session.user;
       const {start, end} = req.body;
       const db = await req.app.get('db')
@@ -110,14 +110,6 @@ console.log('delete expenses ctrl', expenses)
     req.app.get('db').expenses.edit_expense ([new Date(date), title, price, type, req.params.id, req.session.user.id]) 
     .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
     .catch(errMsg => console.log(errMsg))
-  },
-
-  // Passes Postman tests
-  readExpense: (req, res) => {
-    // console.log('read')
-    req.app.get('db').expenses.read_expense([req.params.id, req.session.user.id])
-      .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
-      .catch(errMsg => console.log(errMsg))
   },
 
 }

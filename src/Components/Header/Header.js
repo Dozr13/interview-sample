@@ -40,6 +40,7 @@ function Header(props) {
       </div>
     </section>
 
+
     <h1 className='title'>Bill Track</h1>
 
 
@@ -58,9 +59,11 @@ function Header(props) {
 
   const loggedOutHeader = () => {
     return (
-      <div>
-        <h3>Welcome to</h3>
-        <h1 className='title'>Bill Track</h1>
+      <div className='header-logged-out'>
+        <div className='logged-out-box'>
+          <h3>Welcome to</h3>
+          <h1 className='title'>Bill Track</h1>
+        </div>
       </div>
     )
   }

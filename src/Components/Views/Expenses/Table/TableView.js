@@ -22,7 +22,6 @@ function TableView(props) {
   const useStyles = makeStyles({table: {maxWidth: 700}})
 
   const userExpense = useContext(ExpenseContext)
-  const amount = userExpense.expenses.amount
 
   const [tableMap, setTableMap] = useState([])
   const [tableReduce, setTableReduce] = useState([])
@@ -44,14 +43,11 @@ function TableView(props) {
       <TableCell align='center' onClick={() => userExpense.deleteExpense(e.id, e.due_date)}><DeleteForeverIcon /></TableCell>
     </TableRow>
   }))
+  setTableReduce(userExpense.expenses.reduce((total, current) => {
+    return total += parseInt(current.amount)
+  }, 0))
 }, [userExpense])
 
-  
-  useEffect(() => {
-    setTableReduce(userExpense.expenses.reduce((total, current) => {
-      return total += +current.amount
-    }, 0))
-  }, [userExpense])
 
 
   return (

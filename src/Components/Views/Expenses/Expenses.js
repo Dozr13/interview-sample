@@ -94,24 +94,18 @@ function Expenses() {
         onChange={(e) => setDate(e.target.value)}
       />
       <input 
+        type='text'
         placeholder='Expense Name'
         value={expenseTitle}
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
         type='text'
-        pattern='[0-9]*'
         placeholder='Amount'
         value={amount}
-        onInput={(e) => setAmount(e.target.value)}
+        onInput={(e) => setAmount(e.target.value.replace(/[^0-9.]/g, ''))}
       />
 
-
-      {/* <input
-        placeholder='Expense type'
-        value={billType}
-        onChange={(e) => setType(e.target.value)}
-      /> */}
       <div className='drop-down'>
         <div className='center'>
           <Dropdown value={Dropdown.selectedOption} getValue={setType} />

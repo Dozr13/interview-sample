@@ -3,6 +3,8 @@ import {ExpenseContext} from '../../Context/ExpenseContext'
 import {Link} from 'react-router-dom'
 import './Home.scss'
 
+import Pie from '../Views/Charts/Pie'
+
 
 
   function Home(props) {
@@ -23,30 +25,20 @@ import './Home.scss'
 
     <section id='home-view'>
 
-      {/* <input
-        type='date'
-        placeholder='Due Date'
-        value={dueDate}
-        onChange={(e) => dayHandler(e.target.value)}
-      /> */}
-
-
+      <div>
+        <Pie />
+      </div>
 
 
       <div className='bottom'>
-
         <section id='chart-btns'>
-
-          <button className='graph-btn'>
+          {/* <button className='graph-btn'>
             <Link to="/graph">View Graph</Link>
           </button>
-
           <button className='pie-btn'>
             <Link to="/pie">View Pie Chart</Link>
-          </button>
-
+          </button> */}
         </section>
-
       </div>
     </section>
   )
