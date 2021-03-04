@@ -36,7 +36,7 @@ console.log({expense})
     // console.log('click', req.body)
     const {id} = req.session.user
     const {dueDate} = req.body
-console.log(dueDate)
+// console.log(dueDate)
     const db = req.app.get('db')
     if (dueDate){
       if(dueDate.day <= 9){
@@ -46,10 +46,10 @@ console.log(dueDate)
         dueDate.month = `0${dueDate.month}`
       } 
       const date = `${dueDate.year}-${dueDate.month}-${dueDate.day}`
-      // console.log('isItString', id, date, typeof date)
+// console.log('isItString', id, date, typeof date)
       db.expenses.read_day_expenses(id, date)
       .then(expenses => {
-console.log('read expenses ctrl', expenses) 
+// console.log('read expenses ctrl', expenses) 
         res.status(200).send(expenses)
       })
       .catch(errMsg => console.log(errMsg))
@@ -72,9 +72,6 @@ console.log('delete expenses ctrl', expenses)
       .catch(errMsg => console.log(errMsg))
   },
   
-
-
-
 
 
     readRangeExpenses: async (req, res) => {

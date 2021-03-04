@@ -10,9 +10,50 @@
   align-items: flex-end;
 }
 
-.calendar-box{
+// .calendar-box{
+//   display: flex;
+//   justify-content: center;
+// }
+
+.home-bar{
+  width: 100vw;
+  height: 5vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+}
+
+// !
+.date-btns{
+  width: 25%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.date-view-options{
+  font-size: 1.5rem;
+  color: red;
+}
+
+.day{
+  height: 2rem;
+  width: 3.5rem;
+}
+
+.month{
+  height: 2rem;
+  width: 3.5rem;
+}
+
+.year{
+  height: 2rem;
+  width: 3.5rem;
+}
+
+.date-picker{
+  margin-left: 1vw;
 }
 
 .graph-btn{

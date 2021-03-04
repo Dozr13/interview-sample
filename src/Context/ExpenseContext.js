@@ -38,8 +38,15 @@ export const ExpenseProvider = (props) => {
     }).catch(err => console.log(err))
   }
 
+  const readRangeExpenses = (start, end) => {
+    axios.get('/api/expenses-range', {start, end}).then((res) => {
+      console.log('range', res)
+      setExpense(res.data)
+    }).catch(err => console.log(err))
+  }
+
   return (
-    <ExpenseContext.Provider value={{expenses, setExpense, createExpense, readDay, deleteExpense}}>
+    <ExpenseContext.Provider value={{expenses, setExpense, createExpense, readDay, deleteExpense, readRangeExpenses}}>
       {props.children}
     </ExpenseContext.Provider>
   )

@@ -53,6 +53,14 @@ const Dropdown = (props) => {
       value: 'Internet'
     },
     {
+      label: 'Groceries',
+      value: 'Groceries'
+    },
+    {
+      label: 'Eating Out',
+      value: 'Eating out'
+    },
+    {
       label: 'Miscellaneous',
       value: 'Miscellaneous'
     }

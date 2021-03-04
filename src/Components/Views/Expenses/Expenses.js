@@ -23,10 +23,8 @@ function Expenses() {
   const userExpense = useContext(ExpenseContext)
 
   useEffect(() => {
-    const curr = new Date()
-    
-    console.log('useEffect Expenses.js', curr)
-    userExpense.readDay(curr)
+    // console.log('useEffect Expenses.js')
+    userExpense.readDay()
   }, [])
 
 
@@ -48,7 +46,6 @@ function Expenses() {
 
 
   const renderCustomInput = ({ ref }) => (
-
     <input
       readOnly
       ref={ref} // necessary

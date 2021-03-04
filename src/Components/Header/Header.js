@@ -27,12 +27,12 @@ function Header(props) {
         Welcome {userAuth.user.firstName}!
         <section className='link-bar'>
           <div className='home-link'>
-            <Link to="/home"><HomeIcon style={{fontSize: 55}} />
+            <Link to="/home"><HomeIcon style={{fontSize: 35}} />
               <span>Home</span>
             </Link>
           </div>
           <div className='expenses-link'>
-            <Link to="/expenses"><MonetizationOnIcon style={{fontSize: 55}} />
+            <Link to="/expenses"><MonetizationOnIcon style={{fontSize: 35}} />
               <span>Expenses</span>
             </Link>
           </div>
@@ -83,6 +83,7 @@ function Header(props) {
     
     <div id='header-bar'>
       <div className='header-options'>
+
 
       <section className='header-logged-out'>
         {!userAuth.user &&
