@@ -37,7 +37,6 @@ app.post('/api/auth/logout', ctrlUser.logout)
 
 // Expense Endpoints
 app.post('/api/read-day', auth.userOnly, ctrlExpense.readDayExpense)
-
 app.post('/api/new-expense', auth.userOnly, ctrlExpense.createExpense)
 app.post('/api/expenses-range', auth.userOnly, ctrlExpense.readRangeExpenses)
 app.put('/api/edit-expense/:id', auth.userOnly, ctrlExpense.editExpense)

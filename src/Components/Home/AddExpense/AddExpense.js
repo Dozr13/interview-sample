@@ -2,6 +2,8 @@ import React, {useContext, useState, useEffect}  from 'react'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
 import Dropdown from '../../Views/Expenses/Dropdown-Menu/Dropdown'
 
+import '../Home.scss'
+
 function AddExpense() {
   const userExpense = useContext(ExpenseContext)
 
@@ -24,34 +26,35 @@ function AddExpense() {
 
   return (
     <div>
+      <div className='background-box'>
 
-      <input
-        type='date'
-        placeholder='Due Date'
-        value={dueDate}
-        onChange={(e) => setDate(e.target.value)}
-      />
-      <input 
-        type='text'
-        placeholder='Expense Name'
-        value={expenseTitle}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <input
-        type='text'
-        placeholder='Amount'
-        value={amount}
-        onInput={(e) => setAmount(e.target.value.replace(/[^0-9.]/g, ''))}
-      />
+        <input
+          type='date'
+          placeholder='Due Date'
+          value={dueDate}
+          onChange={(e) => setDate(e.target.value)}
+          />
+        <input 
+          type='text'
+          placeholder='Expense Name'
+          value={expenseTitle}
+          onChange={(e) => setTitle(e.target.value)}
+          />
+        <input
+          type='text'
+          placeholder='Amount'
+          value={amount}
+          onInput={(e) => setAmount(e.target.value.replace(/[^0-9.]/g, ''))}
+          />
 
-      <div className='drop-down'>
-        <div className='center'>
-          <Dropdown value={Dropdown.selectedOption} getValue={setType} />
+        <div className='drop-down'>
+          <div className='center'>
+            <Dropdown value={Dropdown.selectedOption} getValue={setType} />
+          </div>
         </div>
+
+        <button onClick={createExpense}>Add Expense</button>
       </div>
-
-      <button onClick={createExpense}>Add Expense</button>
-
     </div>
   )
 }

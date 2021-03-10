@@ -18,10 +18,10 @@ const DoughnutChart = () => {
   const [miscellaneous, setMiscellaneous] = useState(500)
   const [expenses, setExpenses] = useState([])
 
-  useEffect(() => {
-    // console.log('hi')
-    userExpense.readDay()
-  }, [])
+  // useEffect(() => {
+  //   // console.log('hi')
+  //   userExpense.readDay()
+  // }, [])
 
   useEffect(() => {
     setExpenses(setCatagories())

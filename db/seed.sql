@@ -1,4 +1,3 @@
-
 CREATE TABLE backgrounds (
   id SERIAL PRIMARY KEY,
   url VARCHAR(200)

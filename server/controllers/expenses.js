@@ -11,7 +11,7 @@ module.exports = {
     console.log({checkDate})
       if(checkDate){
         const [expense] = await db.expenses.create_expense([expenseTitle, amount, billType, id])
-        console.log({expense})
+console.log({expense})
         await db.expense_junction.create_expense_junction(checkDate.id, expense.id)
          const expenses = await db.expenses.read_day_expenses(req.session.user.id, dueDate)
 console.log('create expenses ctrl') 
@@ -75,7 +75,7 @@ console.log({expense})
 
 
     readRangeExpenses: async (req, res) => {
-console.log('rangesssss', req.body)
+// console.log('rangesssss', req.body)
       const {id} = req.session.user;
       const {startDate, endDate} = req.body;
       const db = await req.app.get('db')
@@ -94,14 +94,16 @@ console.log('rangesssss', req.body)
   // Passes Postman test
   editExpense: async (req, res) => {
     const {dueDate, expenseTitle, amount, billType} = req.body
-    const bill = await req.app.get('db').expenses.read_expense([req.params.id, req.session.user.id])[0]
+console.log(req.params.id, req.session.user)
+    const [bill] = await req.app.get('db').expenses.read_expense([req.params.id])
+    console.log(bill)
     // let newBill = [due_date: due_date || bill.due_date, expense_title: expense_title || bill.expense_title, amount: amount || bill.amount, bill_type: bill_type || bill.bill_type]
-    let date = dueDate || bill.dueDate
-    let title = expenseTitle || bill.expenseTitle
+    let date = dueDate || bill.due_date
+    let title = expenseTitle || bill.expense_title
     let price = amount || bill.amount
-    let type = billType || bill.billType
+    let type = billType || bill.bill_type
     // console.log(newBill)
-    req.app.get('db').expenses.edit_expense ([new Date(date), title, price, type, req.params.id, req.session.user.id]) 
+    req.app.get('db').expenses.edit_expense([new Date(date), title, price, type, req.params.id, req.session.user.id, bill.expenses_date_id]) 
     .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
     .catch(errMsg => console.log(errMsg))
   },

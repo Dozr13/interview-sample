@@ -17,7 +17,6 @@ function RangePicker() {
       endDate: addDays(new Date(), 7),
       key: 'selection'
     },
-    
   ]);
 
   useEffect(() => {
@@ -34,7 +33,6 @@ function RangePicker() {
   }
 
   const dayHandler = (item) => {
-  console.log(item)
     setState([item.selection])
     userExpense.readRangeExpenses(item.selection)
   }

@@ -27,7 +27,7 @@ return (
   
   <main id='home-view'>
       <header className='home-bar'>
-        <div className='modal'>
+        <div className='modal' id='modal'>
           <button onClick={() => setShow(!show)}>        
             Select Dates to view
           </button>
@@ -58,7 +58,7 @@ return (
             
             <div className='popup-list'>
 
-              <div className='expenses-link'>
+              <div className='expenses-link modal'>
                 <a onClick={() => setAdd(!add)}>
                   <LibraryAddIcon style={{fontSize: 50}} />
                   <span>Add Expense</span>

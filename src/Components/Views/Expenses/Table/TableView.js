@@ -17,8 +17,21 @@ import format from 'date-fns/format'
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+import { TextField } from '@material-ui/core';
+
+
+const useStyles = makeStyles({
+  root: {
+    width: '100%',
+  },
+  container: {
+    maxHeight: 500,
+  },
+});
+
 function TableView() {
   const userExpense = useContext(ExpenseContext)
   const [tableMap, setTableMap] = useState([])
@@ -26,44 +39,28 @@ function TableView() {
   
   userExpense.expenses = Array.from(userExpense.expenses)
   
-  // const columns = [
-    //   {
-      //     id: 'Due Date',
-      //     label: 'Due Date',
-      //     minWidth: 120
-      //   },
-      //   {
-        //     id: ,
-        //     label: '',
-        //     minWidth: 120
-        //   },
-        //   {
-          //     id: ,
-          //     label: '',
-          //     minWidth: 120
-          //   },
-          //   {
-            //     id: ,
-            //     label: '',
-            //     minWidth: 120
-            //   },
-            //   {
-              //     id: ,
-              //     label: '',
-              //     minWidth: 120
-  //   }
-  // ]
-  
-  
   useEffect(() => {
-    setTableMap (userExpense.expenses.map((e, i) => {
+    setTableMap (userExpense.expenses.map((e, i, startEdit, editIdx, handleChange, stopEditing) => {
+      // console.log(e)
+      const currEdit = editIdx === i
       return <TableRow key={i}>
+      {currEdit ? (
+        <TextField name={e.props} onChange={(event) => handleChange(event, e.props, i)} value={e.props}/>
+      ) : (
+        e.props
+      )}
       <TableCell align='center'>{e.due_date}</TableCell>
       <TableCell align='center'>{e.expense_title}</TableCell>
-      <TableCell align='center'>{e.bill_type}</TableCell>
       <TableCell align='center'>{e.amount}</TableCell>
-
-      <TableCell align='center' onClick={() => userExpense.deleteExpense(e.id, e.due_date)}><DeleteForeverIcon /></TableCell>
+      <TableCell align='center'>{e.bill_type}</TableCell>
+      <TableCell>
+        <DeleteForeverIcon align='center' onClick={() => userExpense.deleteExpense(e.id, e.due_date)}/>
+        {currEdit ? (
+          <DoneOutlineIcon onClick={() => stopEditing()}/>
+        ) : (
+          <EditIcon align='center' onClick={() => userExpense.editExpense(e.due_date, e.expense_title, e.bill_type, e.amount, e.id)}/>
+        )}
+      </TableCell>
     </TableRow>
   }))
   setTableReduce(userExpense.expenses.reduce((total, current) => {
@@ -72,19 +69,26 @@ function TableView() {
 }, [userExpense])
 
 
-const useStyles = makeStyles({
-  table: {
-    maxWidth: 'xl'
-  },
-  container: {
-    maxHeight: 400
-  }
-})
+const classes = useStyles()
+
+
+const [page, setPage] = React.useState(0);
+const [rowsPerPage, setRowsPerPage] = React.useState(8);
+
+const handleChangePage = (event, newPage) => {
+  setPage(newPage);
+};
+
+const handleChangeRowsPerPage = (event) => {
+  setRowsPerPage(+event.target.value);
+  setPage(0);
+};
 
 
 return (
-  <TableContainer component={Paper}>
-      <Table className={useStyles().table} aria-label='spanning table' align='center'>
+  <Paper className={classes.root}>
+    <TableContainer className={classes.container}>
+      <Table stickyHeader className={useStyles().table} aria-label='sticky table' align='center'>
         <TableHead>
           <TableRow>
             <TableCell align='center' colSpan={5}>Details</TableCell>
@@ -98,14 +102,24 @@ return (
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableMap}
+          {tableMap.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)}
           <TableRow>
             <TableCell colSpan={3} align='right' style={{fontSize: 28}}>Total:</TableCell>
             <TableCell align='center' style={{fontSize: 28}}>{tableReduce}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
+      <TablePagination
+        rowsPerPageOptions={[3, 5, 8]}
+        component="div"
+        count={userExpense.expenses.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
     </TableContainer>
+  </Paper>
   )
 }
 
