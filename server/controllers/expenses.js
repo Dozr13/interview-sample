@@ -33,7 +33,7 @@ console.log({expense})
   
   // ! Used to display expenses of selected date
   readDayExpense: async (req, res) => {
-    // console.log('click', req.body)
+// console.log('click', req.body)
     const {id} = req.session.user
     const {dueDate} = req.body
 // console.log(dueDate)
@@ -64,7 +64,7 @@ console.log({expense})
       .then(_ => {
         db.expenses.read_day_expenses(req.session.user.id, req.params.due_date)
         .then(expenses => {
-console.log('delete expenses ctrl', expenses) 
+// console.log('delete expenses ctrl', expenses) 
           res.status(200).send(expenses)
         })
         .catch(errMsg => console.log(errMsg))
@@ -75,21 +75,18 @@ console.log('delete expenses ctrl', expenses)
 
 
     readRangeExpenses: async (req, res) => {
+console.log('rangesssss', req.body)
       const {id} = req.session.user;
-      const {start, end} = req.body;
+      const {startDate, endDate} = req.body;
       const db = await req.app.get('db')
-      if (start && end){
-        db.expenses.read_all_expenses_date(id, start, end)
+      if (startDate && endDate){
+        db.expenses.read_all_expenses_date(id, startDate, endDate)
         .then(expenses => res.status(200).send(expenses))
-        .catch(errMsg => console.log(errMsg))
-      } else if (start){
-        db.expenses.read_all_expenses_date(id, start, Date.now())
+        .catch(errMsg => console.log('1', errMsg))
+      } else if (startDate){
+        db.expenses.read_all_expenses_date(id, startDate, Date.now())
         .then(expenses => res.status(200).send(expenses))
-        .catch(errMsg => console.log(errMsg))
-    } else {
-      db.expenses.read_all_expenses(id)
-        .then(expenses => res.status(200).send(expenses))
-        .catch(errMsg => console.log(errMsg))
+        .catch(errMsg => console.log('2', errMsg))
     }
   },
 

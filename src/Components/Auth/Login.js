@@ -8,12 +8,12 @@ function Login(props) {
   const [password, setPassword] = useState('')
   const userAuth = useContext(AuthContext)
 
-const handleLogin = (e) => {
-  e.preventDefault()
-  userAuth.login(email, password)
-  setEmail('')
-  setPassword('')
-}
+  const handleLogin = (e) => {
+    e.preventDefault()
+    userAuth.login(email, password)
+    setEmail('')
+    setPassword('')
+  }
 
 
 
@@ -26,6 +26,7 @@ const handleLogin = (e) => {
 
         <section>
           <input
+            autoFocus
             className='entry-text'
             type='text'
             autoComplete='username'
@@ -54,7 +55,6 @@ const handleLogin = (e) => {
         <section id='register-btn'>
           <Link to='/register' >
             <button 
-              autoFocus 
               className='register-style' 
               type='button'>
                 Register

@@ -39,7 +39,7 @@ app.post('/api/auth/logout', ctrlUser.logout)
 app.post('/api/read-day', auth.userOnly, ctrlExpense.readDayExpense)
 
 app.post('/api/new-expense', auth.userOnly, ctrlExpense.createExpense)
-app.get('/api/expenses-range', auth.userOnly, ctrlExpense.readRangeExpenses)
+app.post('/api/expenses-range', auth.userOnly, ctrlExpense.readRangeExpenses)
 app.put('/api/edit-expense/:id', auth.userOnly, ctrlExpense.editExpense)
 app.delete('/api/expense/:id/:due_date', auth.userOnly, ctrlExpense.deleteExpense) 
 

@@ -10,7 +10,6 @@
     ]
   },
   "dependencies": {
-    "@hassanmojab/react-modern-calendar-datepicker": "^3.1.7",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
@@ -28,8 +27,8 @@
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-chartjs-2": "^2.11.1",
+    "react-date-range": "^1.1.3",
     "react-dom": "^17.0.1",
-    "react-modern-calendar-datepicker": "^3.1.6",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",

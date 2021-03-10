@@ -28,7 +28,7 @@ const DoughnutChart = () => {
   }, [userExpense])
 
   const setCatagories = () => {
-    console.log(userExpense.expenses)
+    // console.log(userExpense.expenses)
     let home = 0
     let insurance = 0
     let auto = 0

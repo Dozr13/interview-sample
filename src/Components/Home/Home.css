@@ -1,8 +1,54 @@
+#home-view {
+  height: 87vh;
+  width: 100vw;
+  background-color: darkblue;
+  margin: 0;
+}
+
 #chart-btns {
-  height: 85vh;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+}
+
+.home-bar {
+  width: 100vw;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7e3d3d;
+}
+
+.date-btns {
+  width: 25%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.date-view-options {
+  font-size: 1.5rem;
+  color: red;
+}
+
+.day {
+  height: 2rem;
+  width: 3.5rem;
+}
+
+.month {
+  height: 2rem;
+  width: 3.5rem;
+}
+
+.year {
+  height: 2rem;
+  width: 3.5rem;
+}
+
+.date-picker {
+  margin-left: 1vw;
 }
 
 .graph-btn {
@@ -21,5 +67,21 @@
   border: none;
   border-radius: 45%;
   margin: 50px;
+}
+
+#view {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.left {
+  width: 60vw;
+  height: 100vh;
+}
+
+.right {
+  width: 40vw;
+  height: 100vh;
 }
 /*# sourceMappingURL=Home.css.map */

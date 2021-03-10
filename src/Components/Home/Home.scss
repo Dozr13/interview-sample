@@ -1,60 +1,64 @@
+
+.background-box{
+  height: 103%;
+  width: 103%;
+  background-color: #000;
+}
+
 #home-view{
   height: 87vh;
   width: 100vw;
+  background-color: darkblue;
   margin: 0;
+  overflow-y: hidden;
 }
 
-#chart-btns{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-// .calendar-box{
+// #chart-btns{
 //   display: flex;
-//   justify-content: center;
+//   justify-content: space-between;
+//   align-items: flex-end;
 // }
 
-.home-bar{
-  width: 100vw;
-  height: 5vh;
+.modal{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(0, 0, 0);
+  z-index: 100;
 }
 
-// !
-.date-btns{
-  width: 25%;
+.open-modal{
+  // width: 1470px;
+  max-width: 100%;
+  // height: 841;
+  max-height: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  // background: rgba(0, 0, 0, 0.6);
+}
+
+.home-bar{
+  width: 100vw;
+  height: 3vh;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  background-color: #000;
 }
 
-.date-view-options{
-  font-size: 1.5rem;
-  color: red;
-}
 
-.day{
-  height: 2rem;
-  width: 3.5rem;
-}
 
-.month{
-  height: 2rem;
-  width: 3.5rem;
-}
 
-.year{
-  height: 2rem;
-  width: 3.5rem;
-}
-
-.date-picker{
-  margin-left: 1vw;
-}
 
 .graph-btn{
   height: 4rem;
@@ -72,4 +76,48 @@
   border: none;
   border-radius: 45%;
   margin: 50px;
+}
+
+#vertical-panes{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.left{
+  width: 60vw;
+  height: 100vh;
+}
+
+.right{
+  width: 30vw;
+  height: 100vh;
+}
+
+.popup-list{
+  width: 10vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.expenses-link a{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: red;
+  font-size: 1rem;
+}
+
+.goals-link a{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: magenta;
+  font-size: 1rem;
+  margin-top: 3vh;
+}
+
+.expenses-link:hover{
+  cursor: pointer;
 }

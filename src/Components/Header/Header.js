@@ -2,9 +2,10 @@ import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {AuthContext} from '../../Context/AuthContext'
 
-import {makeStyles} from '@material-ui/core/styles'
+// import {makeStyles} from '@material-ui/core/styles'
 import SvgIcon from '@material-ui/core/SvgIcon'
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+// import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 import './Header.scss'
 
@@ -18,7 +19,7 @@ function Header(props) {
 }
 
 
-
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   User Info Route change
   const loggedInHeader = () => {
   return (
   <section className='header-logged-in'>
@@ -31,9 +32,9 @@ function Header(props) {
               <span>Home</span>
             </Link>
           </div>
-          <div className='expenses-link'>
-            <Link to="/expenses"><MonetizationOnIcon style={{fontSize: 35}} />
-              <span>Expenses</span>
+          <div className='account-link'>
+            <Link to="/expenses"><AccountBoxIcon style={{fontSize: 35}} />
+              <span>User Info</span>
             </Link>
           </div>
       </section>
@@ -93,9 +94,6 @@ function Header(props) {
           loggedInHeader()
         }
       </section>
-
-
-
 
       </div>
     </div>

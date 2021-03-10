@@ -1,0 +1,12 @@
+* {
+  text-decoration: none;
+  display: flex;
+}
+
+.date-btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: #2087c3;
+}
+/*# sourceMappingURL=DoughnutChart.css.map */

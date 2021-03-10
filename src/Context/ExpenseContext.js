@@ -38,9 +38,10 @@ export const ExpenseProvider = (props) => {
     }).catch(err => console.log(err))
   }
 
-  const readRangeExpenses = (start, end) => {
-    axios.get('/api/expenses-range', {start, end}).then((res) => {
-      console.log('range', res)
+  const readRangeExpenses = (selection) => {
+// console.log(selection)
+    axios.post('/api/expenses-range', {...selection}).then((res) => {
+// console.log('range', res)
       setExpense(res.data)
     }).catch(err => console.log(err))
   }

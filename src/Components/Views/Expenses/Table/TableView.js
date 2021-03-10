@@ -10,6 +10,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TablePagination from '@material-ui/core/TablePagination';
 
 import format from 'date-fns/format'
 
@@ -17,23 +18,45 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-
-function TableView(props) {
-  const useStyles = makeStyles({table: {maxWidth: 700}})
-
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function TableView() {
   const userExpense = useContext(ExpenseContext)
-
   const [tableMap, setTableMap] = useState([])
   const [tableReduce, setTableReduce] = useState([])
   
   userExpense.expenses = Array.from(userExpense.expenses)
-
-
+  
+  // const columns = [
+    //   {
+      //     id: 'Due Date',
+      //     label: 'Due Date',
+      //     minWidth: 120
+      //   },
+      //   {
+        //     id: ,
+        //     label: '',
+        //     minWidth: 120
+        //   },
+        //   {
+          //     id: ,
+          //     label: '',
+          //     minWidth: 120
+          //   },
+          //   {
+            //     id: ,
+            //     label: '',
+            //     minWidth: 120
+            //   },
+            //   {
+              //     id: ,
+              //     label: '',
+              //     minWidth: 120
+  //   }
+  // ]
+  
   
   useEffect(() => {
     setTableMap (userExpense.expenses.map((e, i) => {
-      // console.log(e)
-      // const date = format(e.due_date, 'yyyy-MM-dd')
       return <TableRow key={i}>
       <TableCell align='center'>{e.due_date}</TableCell>
       <TableCell align='center'>{e.expense_title}</TableCell>
@@ -49,9 +72,18 @@ function TableView(props) {
 }, [userExpense])
 
 
+const useStyles = makeStyles({
+  table: {
+    maxWidth: 'xl'
+  },
+  container: {
+    maxHeight: 400
+  }
+})
 
-  return (
-    <TableContainer component={Paper}>
+
+return (
+  <TableContainer component={Paper}>
       <Table className={useStyles().table} aria-label='spanning table' align='center'>
         <TableHead>
           <TableRow>
