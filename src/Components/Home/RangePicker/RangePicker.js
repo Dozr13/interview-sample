@@ -2,38 +2,29 @@ import React, {useState, useEffect, useContext} from 'react'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
 
 import {DateRangePicker} from 'react-date-range';
-import {addDays} from 'date-fns';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+
+import {addDays} from 'date-fns';
+
 
 import '../Home.scss'
 
 function RangePicker() {
   const userExpense = useContext(ExpenseContext)
   
-  const [state, setState] = useState([
+  const [range, setRange] = useState([
     {
       startDate: new Date(),
       endDate: addDays(new Date(), 7),
       key: 'selection'
-    },
+    }
   ]);
 
-  useEffect(() => {
-// console.log(selectionRange.startDate, selectionRange.endDate)
-    userExpense.readRangeExpenses(selectionRange)
-  }, [])
-
-
-
-  const selectionRange = {
-    startDate: new Date(),
-    endDate: new Date(),
-    key: 'selection',
-  }
 
   const dayHandler = (item) => {
-    setState([item.selection])
+    setRange([item.selection])
+    userExpense.setRange([item.selection])
     userExpense.readRangeExpenses(item.selection)
   }
 
@@ -45,7 +36,7 @@ function RangePicker() {
           showSelectionPreview={true}
           moveRangeOnFirstSelection={false}
           months={1}
-          ranges={state}
+          ranges={range}
           direction="vertical"
           scroll={{enabled: true}}
         />

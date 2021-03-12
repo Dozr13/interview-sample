@@ -33,7 +33,7 @@ function Header(props) {
             </Link>
           </div>
           <div className='account-link'>
-            <Link to="/expenses"><AccountBoxIcon style={{fontSize: 35}} />
+            <Link to="/editUser"><AccountBoxIcon style={{fontSize: 35}} />
               <span>User Info</span>
             </Link>
           </div>

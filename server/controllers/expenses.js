@@ -59,17 +59,12 @@ console.log({expense})
   // ! Used in TableView.js to delete expenses from db
   deleteExpense: (req, res) => {
     const db = req.app.get('db')
-// console.log(req.params, req.session.user)
+// console.log('delete', req.params, req.session.user)
     db.expenses.delete_expense([req.params.id, req.session.user.id])
       .then(_ => {
-        db.expenses.read_day_expenses(req.session.user.id, req.params.due_date)
-        .then(expenses => {
-// console.log('delete expenses ctrl', expenses) 
-          res.status(200).send(expenses)
+          res.sendStatus(200)
         })
         .catch(errMsg => console.log(errMsg))
-      })
-      .catch(errMsg => console.log(errMsg))
   },
   
 
@@ -78,13 +73,14 @@ console.log({expense})
 // console.log('rangesssss', req.body)
       const {id} = req.session.user;
       const {startDate, endDate} = req.body;
+console.log('read range', startDate, endDate)
       const db = await req.app.get('db')
       if (startDate && endDate){
         db.expenses.read_all_expenses_date(id, startDate, endDate)
         .then(expenses => res.status(200).send(expenses))
         .catch(errMsg => console.log('1', errMsg))
       } else if (startDate){
-        db.expenses.read_all_expenses_date(id, startDate, Date.now())
+        db.expenses.read_all_expenses_date(id, startDate, new Date())
         .then(expenses => res.status(200).send(expenses))
         .catch(errMsg => console.log('2', errMsg))
     }
@@ -94,9 +90,9 @@ console.log({expense})
   // Passes Postman test
   editExpense: async (req, res) => {
     const {dueDate, expenseTitle, amount, billType} = req.body
-console.log(req.params.id, req.session.user)
+console.log('edit-controller 1', req.params.id, req.session.user)
     const [bill] = await req.app.get('db').expenses.read_expense([req.params.id])
-    console.log(bill)
+console.log('edit2', bill)
     // let newBill = [due_date: due_date || bill.due_date, expense_title: expense_title || bill.expense_title, amount: amount || bill.amount, bill_type: bill_type || bill.bill_type]
     let date = dueDate || bill.due_date
     let title = expenseTitle || bill.expense_title

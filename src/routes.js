@@ -4,7 +4,7 @@ import {Switch, Route, HashRouter} from 'react-router-dom'
 import Login from './Components/Auth/Login'
 import Register from './Components/Auth/Register'
 import Home from './Components/Home/Home'
-import Expenses from './Components/Views/Expenses/Expenses'
+import EditUser from './Components/Auth/EditUser'
 
 
 export default (
@@ -14,7 +14,7 @@ export default (
       <Route path='/register' component={Register} />
 
       <Route path='/home' component={Home} />
-      <Route path='/expenses' component={Expenses} />
+      <Route path='/editUser' component={EditUser} />
     </Switch>
   </HashRouter>
 )

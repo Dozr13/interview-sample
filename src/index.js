@@ -2,21 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {HashRouter} from 'react-router-dom';
+import {HashRouter, BrowserRouter} from 'react-router-dom';
 import {AuthProvider} from './Context/AuthContext'
 import {ExpenseProvider} from './Context/ExpenseContext';
 
 import './index.scss';
 
+const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter
+
 ReactDOM.render(
   <React.StrictMode>
-      <HashRouter>
+      <Router>
         <AuthProvider>
           <ExpenseProvider>
             <App />
           </ExpenseProvider>
         </AuthProvider>
-      </HashRouter>
+      </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

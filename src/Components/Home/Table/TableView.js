@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 
-import {ExpenseContext} from '../../../../Context/ExpenseContext'
+import {ExpenseContext} from '../../../Context/ExpenseContext'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -12,7 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 
-import format from 'date-fns/format'
+import {format} from 'date-fns/format'
 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'
@@ -32,16 +32,16 @@ const useStyles = makeStyles({
   },
 });
 
-function TableView() {
+function TableView(props) {
   const userExpense = useContext(ExpenseContext)
   const [tableMap, setTableMap] = useState([])
   const [tableReduce, setTableReduce] = useState([])
   
   userExpense.expenses = Array.from(userExpense.expenses)
-  
-  useEffect(() => {
-    setTableMap (userExpense.expenses.map((e, i, startEdit, editIdx, handleChange, stopEditing) => {
-      // console.log(e)
+
+  useEffect((props) => {
+    setTableMap (userExpense.expenses.map((e, i, handleRemove, startEditing, editIdx, handleChange, stopEditing) => {
+// console.log(e)
       const currEdit = editIdx === i
       return <TableRow key={i}>
       {currEdit ? (
@@ -50,16 +50,23 @@ function TableView() {
         e.props
       )}
       <TableCell align='center'>{e.due_date}</TableCell>
+      {console.log(e.due_date)}
       <TableCell align='center'>{e.expense_title}</TableCell>
-      <TableCell align='center'>{e.amount}</TableCell>
       <TableCell align='center'>{e.bill_type}</TableCell>
+      <TableCell align='center'>${e.amount}</TableCell>
       <TableCell>
-        <DeleteForeverIcon align='center' onClick={() => userExpense.deleteExpense(e.id, e.due_date)}/>
         {currEdit ? (
           <DoneOutlineIcon onClick={() => stopEditing()}/>
-        ) : (
-          <EditIcon align='center' onClick={() => userExpense.editExpense(e.due_date, e.expense_title, e.bill_type, e.amount, e.id)}/>
-        )}
+          ) : (
+            <EditIcon align='center' onClick=
+            // {() => userExpense.editExpense(e.due_date, e.expense_title, e.bill_type, e.amount, e.id)}
+            {() => startEditing(i)}
+            />
+            )}
+            <DeleteForeverIcon align='center' onClick=
+            {() => userExpense.deleteExpense(e.id)}
+            // {() => handleRemove(i)}
+            />
       </TableCell>
     </TableRow>
   }))
@@ -90,9 +97,6 @@ return (
     <TableContainer className={classes.container}>
       <Table stickyHeader className={useStyles().table} aria-label='sticky table' align='center'>
         <TableHead>
-          <TableRow>
-            <TableCell align='center' colSpan={5}>Details</TableCell>
-          </TableRow>
           <TableRow>
             <TableCell align='center' style={{fontSize: 18}}>Date Due</TableCell>
             <TableCell align='center' style={{fontSize: 18}}>Title</TableCell>

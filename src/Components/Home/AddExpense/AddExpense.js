@@ -1,6 +1,8 @@
 import React, {useContext, useState, useEffect}  from 'react'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
-import Dropdown from '../../Views/Expenses/Dropdown-Menu/Dropdown'
+import Dropdown from './Dropdown-Menu/Dropdown'
+// import format from 'date-fns/format'
+
 
 import '../Home.scss'
 
@@ -13,10 +15,9 @@ function AddExpense() {
   const [billType, setType] = useState('')
 
 
-  const createExpense = (e) => {
-    // const date = format(new Date(), 'yyyy-MM-dd')
+  const createExpense = () => {
     userExpense.createExpense(dueDate, expenseTitle, amount, billType)
-    // console.log('date Expense.js--', dueDate, selectedDay)
+// console.log('date Expense.js--', dueDate)
     setDate('')
     setTitle('')
     setAmount('')
