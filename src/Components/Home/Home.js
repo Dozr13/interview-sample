@@ -31,8 +31,8 @@ function Home() {
 
   useEffect(() => {
     userExpense.readRangeExpenses({
-      startDate: (new Date(date.getFullYear(), date.getMonth(), 1)),
-      endDate: (new Date(date.getFullYear(), date.getMonth(), 0)),
+      startDate: startOfMonth(new Date(date.getFullYear(), date.getMonth(), 1)),
+      endDate: lastDayOfMonth(new Date(date.getFullYear(), date.getMonth() + 1, 0)),
       key: 'default'
     })
   }, [])
@@ -43,16 +43,6 @@ function Home() {
     userExpense.deleteExpense(id)
   }
 
-
-  const startEditing = (i) => {
-    setEditIdx({editIdx: i})
-  }
-
-  const stopEditing = (e) => {
-    console.log(e)
-    userExpense.editExpense(e.due_date, e.expense_title, e.bill_type, e.amount, e.id)
-    setEditIdx({editIdx: -1})
-  }
 
   const handleChange = (e, name, i) => {
     const {value} = e.target

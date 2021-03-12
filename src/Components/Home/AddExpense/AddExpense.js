@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect}  from 'react'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
-import Dropdown from './Dropdown-Menu/Dropdown'
+import Dropdown from '../../Views/Expenses/Dropdown-Menu/Dropdown'
 // import format from 'date-fns/format'
 
 

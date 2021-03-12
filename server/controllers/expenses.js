@@ -1,5 +1,3 @@
-let errMsg = "Oops! Something went wrong. Our engineers have been informed and will get the issue patched up right away, thank you for your patience!"
-
 module.exports = {
   // ! Used in Expense.js
   createExpense: async (req, res) => {
@@ -52,7 +50,7 @@ console.log({expense})
 // console.log('read expenses ctrl', expenses) 
         res.status(200).send(expenses)
       })
-      .catch(errMsg => console.log(errMsg))
+      .catch(err => console.log(err))
     }
   },
   
@@ -64,7 +62,7 @@ console.log({expense})
       .then(_ => {
           res.sendStatus(200)
         })
-        .catch(errMsg => console.log(errMsg))
+        .catch(err => console.log(err))
   },
   
 
@@ -78,11 +76,11 @@ console.log('read range', startDate, endDate)
       if (startDate && endDate){
         db.expenses.read_all_expenses_date(id, startDate, endDate)
         .then(expenses => res.status(200).send(expenses))
-        .catch(errMsg => console.log('1', errMsg))
+        .catch(err => console.log('1', err))
       } else if (startDate){
         db.expenses.read_all_expenses_date(id, startDate, new Date())
         .then(expenses => res.status(200).send(expenses))
-        .catch(errMsg => console.log('2', errMsg))
+        .catch(err => console.log('2', err))
     }
   },
 
@@ -90,6 +88,7 @@ console.log('read range', startDate, endDate)
   // Passes Postman test
   editExpense: async (req, res) => {
     const {dueDate, expenseTitle, amount, billType} = req.body
+console.log({dueDate, expenseTitle, amount, billType})
 console.log('edit-controller 1', req.params.id, req.session.user)
     const [bill] = await req.app.get('db').expenses.read_expense([req.params.id])
 console.log('edit2', bill)
@@ -101,7 +100,7 @@ console.log('edit2', bill)
     // console.log(newBill)
     req.app.get('db').expenses.edit_expense([new Date(date), title, price, type, req.params.id, req.session.user.id, bill.expenses_date_id]) 
     .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
-    .catch(errMsg => console.log(errMsg))
+    .catch(err => console.log(err))
   },
 
 }

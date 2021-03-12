@@ -16,10 +16,9 @@ import {format} from 'date-fns/format'
 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import EditIcon from '@material-ui/icons/Edit';
 
-import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+import Row from './Row'
+
 import { TextField } from '@material-ui/core';
 
 
@@ -40,35 +39,15 @@ function TableView(props) {
   userExpense.expenses = Array.from(userExpense.expenses)
 
   useEffect((props) => {
-    setTableMap (userExpense.expenses.map((e, i, handleRemove, startEditing, editIdx, handleChange, stopEditing) => {
+    setTableMap (userExpense.expenses.map((e, i) => {
 // console.log(e)
-      const currEdit = editIdx === i
-      return <TableRow key={i}>
-      {currEdit ? (
-        <TextField name={e.props} onChange={(event) => handleChange(event, e.props, i)} value={e.props}/>
-      ) : (
-        e.props
-      )}
-      <TableCell align='center'>{e.due_date}</TableCell>
-      {console.log(e.due_date)}
-      <TableCell align='center'>{e.expense_title}</TableCell>
-      <TableCell align='center'>{e.bill_type}</TableCell>
-      <TableCell align='center'>${e.amount}</TableCell>
-      <TableCell>
-        {currEdit ? (
-          <DoneOutlineIcon onClick={() => stopEditing()}/>
-          ) : (
-            <EditIcon align='center' onClick=
-            // {() => userExpense.editExpense(e.due_date, e.expense_title, e.bill_type, e.amount, e.id)}
-            {() => startEditing(i)}
-            />
-            )}
-            <DeleteForeverIcon align='center' onClick=
-            {() => userExpense.deleteExpense(e.id)}
-            // {() => handleRemove(i)}
-            />
-      </TableCell>
-    </TableRow>
+      return <Row key={i}
+        date={e.due_date}
+        title={e.expense_title}
+        type={e.bill_type}
+        amount={e.amount}
+        id={e.id}
+      />
   }))
   setTableReduce(userExpense.expenses.reduce((total, current) => {
     return total += parseInt(current.amount)
