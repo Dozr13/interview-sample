@@ -1,28 +1,45 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, useRef} from 'react'
 import {ExpenseContext} from '../../Context/ExpenseContext'
-// import {Link} from 'react-router-dom'
+import {lastDayOfMonth, startOfMonth} from 'date-fns';
+import AddExpense from './AddExpense/AddExpense'
+import Goals from './Goals/Goals'
 import DoughnutChart from '../Views/Charts/DoughnutChart'
 import BarChart from '../Views/Charts/BarChart'
-
 import RangePicker from './RangePicker/RangePicker'
-
+import TableView from './Table/TableView'
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
+import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+import ReactDOM from 'react-dom'
 
-import {lastDayOfMonth, startOfMonth} from 'date-fns';
 
 import './Home.scss'
-import AddExpense from './AddExpense/AddExpense'
-import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
-
-import TableView from './Table/TableView'
 
 
+// let useClickOutside = (handler) => {
+//   let domNode = useRef()
 
+//   useEffect(() => {
+//     let maybeHandler = (e) => {
+//       if (!domNode.current.contains(e.target)) {
+//         handler()
+//     }
+//   }
+//     document.addEventListener("mousedown", maybeHandler)
+//     return() => {
+//       document.removeEventListener("mousedown", maybeHandler)
+//     }
+//   }, [])
+
+//   return domNode
+// }
 
 function Home() {
   const userExpense = useContext(ExpenseContext)
 
   const [selectedChart, setSelectedChart] = useState('Doughnut')
+// 
+  const [showModal, setShowModal] = useState(false)
+
   const [show, setShow] = useState(false)
   const [add, setAdd] = useState(false)
   const [goal, setGoal] = useState(false)
@@ -37,58 +54,78 @@ function Home() {
     })
   }, [])
 
-  const [editIdx, setEditIdx] = useState(-1)
+// 
+const handleClick = event => {
+  event.preventDefault()
 
+  setShowModal((true), () => {
+    document.addEventListener("click", closeMenu())
+  })
+}
+
+// 
+const closeMenu = () => {
+  setShowModal((false), () => {
+    document.removeEventListener('click', closeMenu())
+  })
+}
+
+
+  
+  
   const handleRemove = (id) => {
     userExpense.deleteExpense(id)
   }
 
 
-  const handleChange = (e, name, i) => {
-    const {value} = e.target
-    setEditIdx(editIdx => ({
-      data: editIdx.data.map((row, j) => j === i ? ({...row, [name]: value}) : row)
-    }))
-  }
+
+  // let domNode = useClickOutside(() => {
+  //   setShow(false)
+  // })
 
 
 return (
   
-  <main id='home-view'>
-      <header className='home-bar'>
-        <div className='modal' id='modal'>
-          <button onClick={() => setShow(!show)}>        
+  <div id='home-view'>
+    <div>
+
+      <header id='home-header'>
+        <section className='home-bar'>
+          <div className='modal' id='modal'>
+          <button id='date-picker-btn' onClick={() => setShow(!show)}>        
             Select Dates to view
           </button>
-            {show ? 
-            <div className='open-modal'>
-              <RangePicker />
-            </div> : null
+            {show ? <div className='open-modal'>
+                      <RangePicker />
+                    </div>
+            : null
             }
-        </div>
+          </div>
+        </section>
       </header>
 
       <main>
-        <button className='doughnut-btn' onClick={() => setSelectedChart('Doughnut')}>
-          View Doughnut
-        </button>
-        <button className='bar-chart-btn' onClick={() => setSelectedChart('Bar')}>
-          View Bar Graph
-        </button>
 
         <div id='vertical-panes'>
           <div className='left'>
             {selectedChart === 'Doughnut' ? <DoughnutChart /> : <BarChart />}
+            <br />
+
+              <section id='view-selection-btns'>
+                <button className='doughnut-btn' onClick={() => setSelectedChart('Doughnut')}>
+                  View Doughnut
+                </button>
+                <button className='bar-chart-btn' onClick={() => setSelectedChart('Bar')}>
+                  View Bar Graph
+                </button>
+              </section>      
+            
           </div>
 
           <div className='right'>
             <TableView 
-              // startEditing={startEdit}
-              // editIdx={editIdx}
-              // stopEditing={stopEditing}
-              // handleChange={handleChange} 
               handleRemove={handleRemove}
-            />
+              />
           </div>
             
             <div className='popup-list'>
@@ -112,7 +149,7 @@ return (
                 </a>
                 {goal ?
                   <div className='open-goal-modal'>
-
+                    <Goals />
                   </div> : null
                 }
               </div>
@@ -150,12 +187,8 @@ return (
 
 
 
-
-
-
-
-
-    </main>
+      </div>
+    </div>
   )
 }
 

@@ -1,34 +1,33 @@
-import React, {useContext, useState, useEffect}  from 'react'
+import React, {useContext, useState}  from 'react'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
-import Dropdown from '../../Views/Expenses/Dropdown-Menu/Dropdown'
+import Dropdown from './Dropdown-Menu/Dropdown'
 // import format from 'date-fns/format'
-
-
 import '../Home.scss'
 
 function AddExpense() {
   const userExpense = useContext(ExpenseContext)
-
+  
   const [dueDate, setDate] = useState('')
   const [expenseTitle, setTitle] = useState('')
   const [amount, setAmount] = useState('')
   const [billType, setType] = useState('')
-
-
+  
+  
   const createExpense = () => {
     userExpense.createExpense(dueDate, expenseTitle, amount, billType)
-// console.log('date Expense.js--', dueDate)
+    // console.log('date Expense.js--', dueDate)
     setDate('')
     setTitle('')
     setAmount('')
     setType('')
   }
+  
+  
 
-
+  
   return (
     <div>
-      <div className='background-box'>
-
+      <div className='background-container'>
         <input
           type='date'
           placeholder='Due Date'

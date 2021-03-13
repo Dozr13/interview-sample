@@ -36,6 +36,7 @@ app.post('/api/auth/register', ctrlUser.register)
 app.post('/api/auth/login', ctrlUser.login)
 app.get('/api/auth/me', ctrlUser.getUser)
 app.post('/api/auth/logout', ctrlUser.logout)
+app.put('/api/auth/update/:id', ctrlUser.editUser)
 
 // Expense Endpoints
 app.post('/api/read-day', auth.userOnly, ctrlExpense.readDayExpense)

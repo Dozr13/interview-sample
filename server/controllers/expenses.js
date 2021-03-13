@@ -6,7 +6,7 @@ module.exports = {
     const {id} = req.session.user
     const {dueDate, expenseTitle, amount, billType} = req.body
     const [checkDate] = await db.expenses_date.check_date(dueDate)
-    console.log({checkDate})
+console.log({checkDate})
       if(checkDate){
         const [expense] = await db.expenses.create_expense([expenseTitle, amount, billType, id])
 console.log({expense})
@@ -71,7 +71,8 @@ console.log({expense})
 // console.log('rangesssss', req.body)
       const {id} = req.session.user;
       const {startDate, endDate} = req.body;
-console.log('read range', startDate, endDate)
+// ! FORMAT DATES???
+// console.log('read range', startDate, endDate)
       const db = await req.app.get('db')
       if (startDate && endDate){
         db.expenses.read_all_expenses_date(id, startDate, endDate)
@@ -86,6 +87,7 @@ console.log('read range', startDate, endDate)
 
 
   // Passes Postman test
+  // ! Still not saving edit!
   editExpense: async (req, res) => {
     const {dueDate, expenseTitle, amount, billType} = req.body
 console.log({dueDate, expenseTitle, amount, billType})
@@ -98,7 +100,7 @@ console.log('edit2', bill)
     let price = amount || bill.amount
     let type = billType || bill.bill_type
     // console.log(newBill)
-    req.app.get('db').expenses.edit_expense([new Date(date), title, price, type, req.params.id, req.session.user.id, bill.expenses_date_id]) 
+    req.app.get('db').expenses.edit_expense([new Date(), bill.expenses_date_id, title, price, type, req.params.id, req.session.user.id]) 
     .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
     .catch(err => console.log(err))
   },

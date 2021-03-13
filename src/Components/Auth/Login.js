@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {AuthContext} from '../../Context/AuthContext'
-import './Login.scss'
+import './User.scss'
 
 function Login(props) {
   const [email, setEmail] = useState('')

@@ -1,10 +1,7 @@
 import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {AuthContext} from '../../Context/AuthContext'
-
-// import {makeStyles} from '@material-ui/core/styles'
 import SvgIcon from '@material-ui/core/SvgIcon'
-// import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 import './Header.scss'
@@ -12,14 +9,12 @@ import './Header.scss'
 function Header(props) {
 
   const userAuth = useContext(AuthContext)
-  // const getUser = useContext(AuthContext)
   
   const handleLogout = () => {
     userAuth.logout()
 }
 
 
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   User Info Route change
   const loggedInHeader = () => {
   return (
   <section className='header-logged-in'>

@@ -30,7 +30,7 @@ function RangePicker() {
 
   return (
     <div>
-      <div className='background-box'>
+      <div className='background-container'>
         <DateRangePicker
           onChange={dayHandler}
           showSelectionPreview={true}

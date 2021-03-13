@@ -7,7 +7,13 @@ export const AuthContext = createContext(null)
 export const AuthProvider = (props) => {
   const [user, setUser] = useState(null)
   const {push} = useHistory()
-
+  
+  const getUser = () => {
+    axios.get('/api/auth/me').then(({data}) => {
+      // console.log(data)
+      setUser(data)
+    })
+  }
   
   const login = (email, password) => {
     axios.post('/api/auth/login', {email, password}).then(({data}) => {
@@ -31,16 +37,18 @@ export const AuthProvider = (props) => {
       push('/home')
     })
   }
-  
-  const getUser = () => {
-    axios.get('/api/auth/me').then(({data}) => {
-      // console.log(data)
+
+  const updateUser = (email, firstName, lastName, password, profilePic, id) => {
+    axios.put(`/api/auth/update/${id}`, {email, firstName, lastName, password, profilePic}).then(({data}) => {
+      getUser(user)
       setUser(data)
+      push('/home')
     })
   }
   
+  
   return (
-    <AuthContext.Provider value={{user, setUser, login, logout, register, getUser}}>
+    <AuthContext.Provider value={{user, getUser, setUser, login, logout, register, updateUser}}>
       {props.children}
     </AuthContext.Provider>
   )
