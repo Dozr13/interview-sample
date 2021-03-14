@@ -2,6 +2,10 @@ import React, {useEffect, useImperativeHandle, useState, forwardRef, useCallback
 import { createPortal } from 'react-dom'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
 
+import { TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+
 import Dropdown from './Dropdown-Menu/Dropdown'
 
 
@@ -60,20 +64,20 @@ function AddExpense({children, fade = false, defaultOpened = false}, ref) {
     <div className='flex-add'>
       <div className='add-inputs'>
 
-
-        <input
+        <TextField
           type='date'
-          placeholder='Due Date'
+          label='Set a Due Date'
+          InputLabelProps={{shrink: true}}
           value={dueDate}
           onChange={(e) => setDate(e.target.value)}
           />
-        <input 
+        <TextField 
           type='text'
           placeholder='Expense Name'
           value={expenseTitle}
           onChange={(e) => setTitle(e.target.value)}
           />
-        <input
+        <TextField
           type='text'
           placeholder='Amount'
           value={amount}

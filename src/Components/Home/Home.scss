@@ -1,8 +1,27 @@
+$main-color: #c3c9eb;
+$secondary-color: #c5a5b0;
 $modal-color: #D4BEBB;
 $home-head-color: #7EB77F;
 
 button{
   cursor: pointer;
+}
+
+.expenses-link a{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: red;
+  font-size: 1rem;
+}
+
+.goals-link a{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: magenta;
+  font-size: 1rem;
+  margin-top: 3vh;
 }
 
 a:hover{
@@ -13,22 +32,69 @@ a:hover{
 #home-view{
   height: 87vh;
   width: 100vw;
-  background-color: darkblue;
+  background-color: $main-color;
   margin: 0;
   overflow: hidden;
 }
 
-
-.open-modal{
-  // width: 1470px;
-  max-width: 100%;
-  // height: 841;
-  max-height: 100%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+#home-header{
+  width: 100vw;
+  height: 1.5em;
+  display: flex;
+  justify-content: center;
+  background-color: $secondary-color;
 }
+
+
+
+
+
+
+
+
+
+
+
+.home-bar{
+  width: 15vw;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 50% 80%;
+  border-bottom-right-radius: 50% 80%;
+  background-color: $home-head-color;
+}
+
+
+
+
+
+
+
+
+#date-picker-btn{
+  height: 2em;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  border-radius: 40%;
+  border: none;
+}
+
+#date-picker-btn:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+// .open-modal{
+//   // width: 1470px;
+//   max-width: 100%;
+//   // height: 841;
+//   max-height: 100%;
+//   position: fixed;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
 
 // .modal-overlay{
 //   position: fixed;
@@ -65,7 +131,8 @@ a:hover{
 //       transform: translate(-50%, -50%);
 // }
 .flex-add{
-  margin: 80px;
+  display: flex;
+  flex-direction: column;
 }
 
 .add-inputs{
@@ -74,40 +141,26 @@ a:hover{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-
 }
 
-#home-header{
+
+
+
+
+
+
+
+#vertical-panes{
   width: 100vw;
-  height: 1.5em;
+  height: 87vh;
   display: flex;
-  justify-content: center;
-  background-color: #000;
-}
-
-.home-bar{
-  width: 15vw;
-  height: 4vh;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  border-bottom-left-radius: 50% 80%;
-  border-bottom-right-radius: 50% 80%;
-  background-color: $home-head-color;
 }
 
-#date-picker-btn{
-  height: 2em;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  border-radius: 40%;
-  border: none;
+.left{
+  width: 55vw;
+  // height: 100vh;
 }
-
-#date-picker-btn:hover{
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
-
-
 
 #view-selection-btns{
   // width: 50%;
@@ -122,7 +175,6 @@ a:hover{
   background-color: deepskyblue;
   border: none;
   border-radius: 45%;
-  // margin: 50px;
 }
 
 .doughnut-btn{
@@ -131,50 +183,20 @@ a:hover{
   background-color: deepskyblue;
   border: none;
   border-radius: 45%;
-  // margin: 50px;
-}
-
-#vertical-panes{
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-
-}
-
-.left{
-  width: 65vw;
-  height: 100vh;
 }
 
 .right{
-  width: 35vw;
-  height: 90vh;
+  width: 40vw;
+  // height: 100%;
 }
 
 .popup-list{
   width: 5vw;
-  height: 100vh;
+  height: 87vh;
   display: flex;
   flex-direction: column;
 }
 
-.expenses-link a{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  color: red;
-  font-size: 1rem;
-}
-
-.goals-link a{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  color: magenta;
-  font-size: 1rem;
-  margin-top: 3vh;
-}
 
 
 

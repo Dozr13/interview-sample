@@ -82,7 +82,7 @@ return (
             
             <div className='popup-list'>
 
-              <div className='expenses-link-modal'>
+              <div className='expenses-link'>
                 <a onClick={() => addModal.current.open()}>
                 {/* // <a onClick={() => setAdd(!add)}> */}
                   <LibraryAddIcon style={{fontSize: 50}} />
