@@ -1,11 +1,17 @@
-import React, {useContext, useState}  from 'react'
+import React, {useEffect, useImperativeHandle, useState, forwardRef, useCallback, useContext} from 'react'
+import { createPortal } from 'react-dom'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
-import Dropdown from './Dropdown-Menu/Dropdown'
-// import format from 'date-fns/format'
-import '../Home.scss'
 
-function AddExpense() {
+import Dropdown from './Dropdown-Menu/Dropdown'
+
+
+const modalElement = document.getElementById('modal-root')
+
+function AddExpense({children, fade = false, defaultOpened = false}, ref) {
   const userExpense = useContext(ExpenseContext)
+
+  const [isOpen, setIsOpen] = useState(defaultOpened)
+  const close = useCallback(() => setIsOpen(false), [])
   
   const [dueDate, setDate] = useState('')
   const [expenseTitle, setTitle] = useState('')
@@ -22,12 +28,39 @@ function AddExpense() {
     setType('')
   }
   
-  
+  useImperativeHandle(ref, () => ({
+    open: () => setIsOpen(true),
+    close
+  }), [close])
+
+
+  const handleEscape = useCallback(event => {
+    if (event.keyCode === 27) close()
+  }, [close])
+
+
+  useEffect(() => {
+    if (isOpen) document.addEventListener('keydown', handleEscape, false)
+    return () => {
+      document.removeEventListener('keydown', handleEscape, false)
+    }
+  }, [handleEscape, isOpen])
 
   
-  return (
-    <div>
-      <div className='background-container'>
+  return createPortal(
+    isOpen ? (
+      <div className={`modal ${fade ? 'modal-fade' : ''}`}>
+        <div className="modal-overlay" onClick={close} />
+          <div className='background-container'>
+
+          </div>
+        <div className="modal-body">
+          <h2 className='modal-font'>Add a new expense</h2>
+     
+    <div className='flex-add'>
+      <div className='add-inputs'>
+
+
         <input
           type='date'
           placeholder='Due Date'
@@ -53,10 +86,18 @@ function AddExpense() {
           </div>
         </div>
 
+  </div>
         <button onClick={createExpense}>Add Expense</button>
-      </div>
+
     </div>
+    </div>
+          <span role="button" className="modal-close" aria-label="close" onClick={close}>
+            X
+          </span>
+      </div>
+    ) : null,
+    modalElement
   )
 }
 
-export default AddExpense
+export default forwardRef(AddExpense)

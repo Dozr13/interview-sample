@@ -9,40 +9,21 @@ import RangePicker from './RangePicker/RangePicker'
 import TableView from './Table/TableView'
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
-import ReactDOM from 'react-dom'
+
 
 
 import './Home.scss'
 
 
-// let useClickOutside = (handler) => {
-//   let domNode = useRef()
-
-//   useEffect(() => {
-//     let maybeHandler = (e) => {
-//       if (!domNode.current.contains(e.target)) {
-//         handler()
-//     }
-//   }
-//     document.addEventListener("mousedown", maybeHandler)
-//     return() => {
-//       document.removeEventListener("mousedown", maybeHandler)
-//     }
-//   }, [])
-
-//   return domNode
-// }
-
 function Home() {
   const userExpense = useContext(ExpenseContext)
 
   const [selectedChart, setSelectedChart] = useState('Doughnut')
-// 
-  const [showModal, setShowModal] = useState(false)
 
-  const [show, setShow] = useState(false)
-  const [add, setAdd] = useState(false)
-  const [goal, setGoal] = useState(false)
+
+  const modal = useRef(null)
+  const addModal = useRef(null)
+  const goalModal = useRef(null)
 
   const date = new Date()
 
@@ -53,36 +34,13 @@ function Home() {
       key: 'default'
     })
   }, [])
-
-// 
-const handleClick = event => {
-  event.preventDefault()
-
-  setShowModal((true), () => {
-    document.addEventListener("click", closeMenu())
-  })
-}
-
-// 
-const closeMenu = () => {
-  setShowModal((false), () => {
-    document.removeEventListener('click', closeMenu())
-  })
-}
-
-
   
   
   const handleRemove = (id) => {
     userExpense.deleteExpense(id)
   }
 
-
-
-  // let domNode = useClickOutside(() => {
-  //   setShow(false)
-  // })
-
+  
 
 return (
   
@@ -91,16 +49,10 @@ return (
 
       <header id='home-header'>
         <section className='home-bar'>
-          <div className='modal' id='modal'>
-          <button id='date-picker-btn' onClick={() => setShow(!show)}>        
-            Select Dates to view
+          <button id='date-picker-btn' onClick={() => modal.current.open()}>
+            Open Date Range
           </button>
-            {show ? <div className='open-modal'>
-                      <RangePicker />
-                    </div>
-            : null
-            }
-          </div>
+            <RangePicker ref={modal} />
         </section>
       </header>
 
@@ -130,28 +82,21 @@ return (
             
             <div className='popup-list'>
 
-              <div className='expenses-link modal'>
-                <a onClick={() => setAdd(!add)}>
+              <div className='expenses-link-modal'>
+                <a onClick={() => addModal.current.open()}>
+                {/* // <a onClick={() => setAdd(!add)}> */}
                   <LibraryAddIcon style={{fontSize: 50}} />
                   <span>Add Expense</span>
                 </a>
-                {add ? 
-                  <div className='open-add-modal'>
-                    <AddExpense />
-                  </div> : null
-                }
+                    <AddExpense ref={addModal} />
               </div>
 
               <div className='goals-link'>
-                <a onClick={() => setGoal(!goal)}>
+                <a onClick={() => goalModal.current.open()}>
                   <SentimentVerySatisfiedIcon style={{fontSize: 50}} />
                   <span>Add Goals</span>
                 </a>
-                {goal ?
-                  <div className='open-goal-modal'>
-                    <Goals />
-                  </div> : null
-                }
+                    <Goals ref={goalModal} />
               </div>
 
             </div>

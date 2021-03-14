@@ -94,12 +94,10 @@ console.log({dueDate, expenseTitle, amount, billType})
 console.log('edit-controller 1', req.params.id, req.session.user)
     const [bill] = await req.app.get('db').expenses.read_expense([req.params.id])
 console.log('edit2', bill)
-    // let newBill = [due_date: due_date || bill.due_date, expense_title: expense_title || bill.expense_title, amount: amount || bill.amount, bill_type: bill_type || bill.bill_type]
     let date = dueDate || bill.due_date
     let title = expenseTitle || bill.expense_title
     let price = amount || bill.amount
     let type = billType || bill.bill_type
-    // console.log(newBill)
     req.app.get('db').expenses.edit_expense([new Date(), bill.expenses_date_id, title, price, type, req.params.id, req.session.user.id]) 
     .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
     .catch(err => console.log(err))
