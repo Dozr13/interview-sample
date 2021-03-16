@@ -1,8 +1,7 @@
 $main-color: #fdcb9b;
-$link-color-one: #816464;
-$link-color-two: #5b5b5d;
+$link-color: #363333;
 
-$logout-btn-background: #ff790b;
+// $logout-btn-background: #ff790b;
 
 
 *{
@@ -65,7 +64,7 @@ a{
   display: flex;
   align-items: center;
   flex-direction: column;
-  color: $link-color-one;
+  color: $link-color;
   font-size: 1rem;
 }
 
@@ -73,7 +72,7 @@ a{
   display: flex;
   align-items: center;
   flex-direction: column;
-  color: $link-color-two;
+  color: $link-color;
   font-size: 1rem;
 }
 

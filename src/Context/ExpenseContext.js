@@ -34,13 +34,12 @@ export const ExpenseProvider = (props) => {
 
   
   const editExpense = (dueDate, expenseTitle, billType, amount, id) => {
-axios.put(`/api/edit-expense/${id}`, {dueDate, expenseTitle, billType, amount}).then((res) => {
+axios.put(`/api/edit-expense/${id}`, {dueDate, expenseTitle, billType, amount}).then(() => {
       readRangeExpenses(range)
     }).catch(err => console.log(err))
   }
   
   const deleteExpense = (id) => {
-    // console.log('deleted', dueDate)
     axios.delete(`/api/expense/${id}`).then((data) => {
       console.log(data)
       readRangeExpenses(range)

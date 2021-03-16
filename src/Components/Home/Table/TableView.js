@@ -12,11 +12,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Row from './Row'
 
 
-
-
-
-
-
 const useStyles = makeStyles({
   root: {
     width: '100%',

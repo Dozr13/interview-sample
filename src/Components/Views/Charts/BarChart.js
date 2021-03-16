@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {Bar, defaults} from 'react-chartjs-2'
-
 import {AuthContext} from '../../../Context/AuthContext'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
 
@@ -17,11 +16,6 @@ const BarChart = () => {
   const [food, setFood] = useState(300)
   const [miscellaneous, setMiscellaneous] = useState(500)
   const [expenses, setExpenses] = useState([])
-
-  // useEffect(() => {
-  //   // console.log('hi')
-  //   userExpense.readDay()
-  // }, [])
 
   useEffect(() => {
     setExpenses(setCatagories())

@@ -1,19 +1,14 @@
 import React, {useEffect, useImperativeHandle, useState, forwardRef, useCallback, useContext} from 'react'
 import { createPortal } from 'react-dom'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
-
 import {DateRangePicker} from 'react-date-range';
+import {addDays} from 'date-fns';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-
-import {addDays} from 'date-fns';
-
 import '../Home.scss'
 
 
 const modalElement = document.getElementById('modal-root')
-
-
 
 
 function RangePicker({ children, fade = false, defaultOpened = false }, ref) {

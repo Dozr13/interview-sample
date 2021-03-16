@@ -1,10 +1,13 @@
 import React, {useEffect, useImperativeHandle, useState, forwardRef, useCallback, useContext} from 'react'
 import { createPortal } from 'react-dom'
 
+import '../Home.scss'
+
+
 
 const modalElement = document.getElementById('modal-root')
 
-function Goals({ children, fade = false, defaultOpened = false }, ref) {
+function UserExpenses({ children, fade = false, defaultOpened = false }, ref) {
 
   const [isOpen, setIsOpen] = useState(defaultOpened)
   const close = useCallback(() => setIsOpen(false), [])
@@ -37,8 +40,8 @@ function Goals({ children, fade = false, defaultOpened = false }, ref) {
           x
         </span>
         <div className='modal-body'>
-          <h2 className='modal-font'>Goals section coming soon!</h2>  
-          <h3 className='modal-font'>Here you'll be able to add monthly Goals to help keep you on track!</h3>
+          <h2 className='modal-font'>Users Expenses section coming soon!</h2>  
+          <h3 className='modal-font'>Here you'll be able to add your expected spending and income amounts!</h3>
         </div>
       </div>
     ) : null,
@@ -47,4 +50,4 @@ function Goals({ children, fade = false, defaultOpened = false }, ref) {
 }
 
 
-export default forwardRef(Goals)
+export default forwardRef(UserExpenses)

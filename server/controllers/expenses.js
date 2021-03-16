@@ -70,7 +70,7 @@ module.exports = {
     readRangeExpenses: async (req, res) => {
       const {id} = req.session.user;
       const {startDate, endDate} = req.body;
-console.log('read range', startDate, endDate)
+// console.log('read range', startDate, endDate)
       const db = await req.app.get('db')
       if (startDate && endDate){
         db.expenses.read_all_expenses_date(id, startDate, endDate)

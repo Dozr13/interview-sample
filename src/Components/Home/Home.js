@@ -4,6 +4,7 @@ import {AuthContext} from '../../Context/AuthContext'
 import {endOfMonth, startOfMonth} from 'date-fns';
 import AddExpense from './AddExpense/AddExpense'
 import Goals from './Goals/Goals'
+import UserExpenses from './UserExpected/UserExpected'
 import DoughnutChart from '../Views/Charts/DoughnutChart'
 import BarChart from '../Views/Charts/BarChart'
 import RangePicker from './RangePicker/RangePicker'
@@ -12,6 +13,7 @@ import TableView from './Table/TableView'
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
 import DateRangeIcon from '@material-ui/icons/DateRange';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 
 import './Home.scss'
@@ -29,6 +31,7 @@ function Home() {
   const modal = useRef(null)
   const addModal = useRef(null)
   const goalModal = useRef(null)
+  const userModal = useRef(null)
 
   const date = new Date()
 
@@ -112,6 +115,13 @@ return (
                 </a>
                     <Goals ref={goalModal} />
               </div>
+              <div className='user-expense-link'>
+                <a onClick={() => userModal.current.open()}>
+                  <AttachMoneyIcon style={{fontSize: 50}} />
+                  <span>Expected</span>
+                </a>
+                  <UserExpenses ref={userModal} />
+              </div>
             </div>
             <br />
           </div>
@@ -134,12 +144,6 @@ return (
           <p>Copyright &copy; BillTrax 2020</p>
         </div>
       </footer>
-
-
-
-
-
-
 
     </div>
   )

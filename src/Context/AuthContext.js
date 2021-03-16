@@ -10,21 +10,19 @@ export const AuthProvider = (props) => {
   
   const getUser = () => {
     axios.get('/api/auth/me').then(({data}) => {
-      // console.log(data)
       setUser(data)
     })
   }
   
   const login = (email, password) => {
     axios.post('/api/auth/login', {email, password}).then(({data}) => {
-      // console.log(data)
       setUser(data)
       push('/home')
     })
   }
   
   const logout = () => {
-    axios.post('/api/auth/logout').then(({data}) => {
+    axios.post('/api/auth/logout').then(() => {
       setUser(null)
         push('/')
       })
@@ -32,7 +30,6 @@ export const AuthProvider = (props) => {
     
     const register = (email, firstName, lastName, password, profilePic) => {
       axios.post('/api/auth/register', {email, firstName, lastName, password, profilePic}).then(({data}) => {
-      // console.log(data)
       setUser(data)
       push('/home')
     })

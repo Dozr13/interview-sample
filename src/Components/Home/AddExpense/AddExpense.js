@@ -1,11 +1,7 @@
 import React, {useEffect, useImperativeHandle, useState, forwardRef, useCallback, useContext} from 'react'
 import { createPortal } from 'react-dom'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
-
 import { TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-
 import Dropdown from './Dropdown-Menu/Dropdown'
 
 
