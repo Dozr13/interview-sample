@@ -8,7 +8,7 @@ import EditUser from './Components/Auth/EditUser'
 
 
 export default (
-  <HashRouter>
+  // <HashRouter>
     <Switch>
       <Route exact path='/' component={Login} />
       <Route path='/register' component={Register} />
@@ -16,5 +16,5 @@ export default (
       <Route path='/home' component={Home} />
       <Route path='/editUser' component={EditUser} />
     </Switch>
-  </HashRouter>
+  // </HashRouter>
 )
