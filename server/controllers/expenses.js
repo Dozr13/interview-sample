@@ -58,7 +58,7 @@ console.log({expense})
   deleteExpense: (req, res) => {
     const db = req.app.get('db')
 // console.log('delete', req.params, req.session.user)
-    db.expenses.delete_expense([req.params.id, req.session.user.id])
+    db.expenses.delete_expense([+req.params.id, req.session.user.id])
       .then(_ => {
           res.sendStatus(200)
         })
@@ -71,8 +71,7 @@ console.log({expense})
 // console.log('rangesssss', req.body)
       const {id} = req.session.user;
       const {startDate, endDate} = req.body;
-// ! FORMAT DATES???
-// console.log('read range', startDate, endDate)
+console.log('read range', startDate, endDate)
       const db = await req.app.get('db')
       if (startDate && endDate){
         db.expenses.read_all_expenses_date(id, startDate, endDate)
@@ -90,17 +89,26 @@ console.log({expense})
   // ! Still not saving edit!
   editExpense: async (req, res) => {
     const {dueDate, expenseTitle, amount, billType} = req.body
-console.log({dueDate, expenseTitle, amount, billType})
-console.log('edit-controller 1', req.params.id, req.session.user)
+// console.log({dueDate, expenseTitle, amount, billType})
+// console.log('edit-controller 1', req.params.id, req.session.user)
+// console.log(req.body)
     const [bill] = await req.app.get('db').expenses.read_expense([req.params.id])
-console.log('edit2', bill)
+// console.log('edit2', bill)
     let date = dueDate || bill.due_date
     let title = expenseTitle || bill.expense_title
     let price = amount || bill.amount
     let type = billType || bill.bill_type
-    req.app.get('db').expenses.edit_expense([new Date(), bill.expenses_date_id, title, price, type, req.params.id, req.session.user.id]) 
+// console.log(date, bill.expenses_date_id, title, price, type, req.params.id, req.session.user.id)
+    req.app.get('db').expenses.edit_expense([date, bill.expenses_date_id, title, price, type, req.params.id, req.session.user.id])
     .then(expense => expense[0] ? res.status(200).send(expense[0]) : res.status(200).send({}))
     .catch(err => console.log(err))
   },
 
+  // newEdit: async (req, res) => {
+  //   const {expenseTitle, amount, billType} = req.body
+  //   console.log(req.body)    
+  //   const [expense] = await req.app.get('db').expenses.new_edit([expenseTitle, amount, billType, req.params.id, req.session.user.id])
+  //   console.log(expense)
+  //   res.sendStatus(200)
+  // }
 }

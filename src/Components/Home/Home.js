@@ -1,15 +1,17 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
 import {ExpenseContext} from '../../Context/ExpenseContext'
-import {lastDayOfMonth, startOfMonth} from 'date-fns';
+import {AuthContext} from '../../Context/AuthContext'
+import {endOfMonth, startOfMonth} from 'date-fns';
 import AddExpense from './AddExpense/AddExpense'
 import Goals from './Goals/Goals'
 import DoughnutChart from '../Views/Charts/DoughnutChart'
 import BarChart from '../Views/Charts/BarChart'
 import RangePicker from './RangePicker/RangePicker'
 import TableView from './Table/TableView'
+
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
-
+import DateRangeIcon from '@material-ui/icons/DateRange';
 
 
 import './Home.scss'
@@ -17,8 +19,11 @@ import './Home.scss'
 
 function Home() {
   const userExpense = useContext(ExpenseContext)
+  const userAuth = useContext(AuthContext)
 
   const [selectedChart, setSelectedChart] = useState('Doughnut')
+
+  const [display, setDisplay] = useState(true)
 
 
   const modal = useRef(null)
@@ -30,7 +35,7 @@ function Home() {
   useEffect(() => {
     userExpense.readRangeExpenses({
       startDate: startOfMonth(new Date(date.getFullYear(), date.getMonth(), 1)),
-      endDate: lastDayOfMonth(new Date(date.getFullYear(), date.getMonth() + 1, 0)),
+      endDate: endOfMonth(new Date(date.getFullYear(), date.getMonth(), 0)),
       key: 'default'
     })
   }, [])
@@ -45,21 +50,27 @@ function Home() {
 return (
   
   <div id='home-view'>
-    <div>
+      <header id='home-header' />
 
-      <header id='home-header'>
-        <section className='home-bar'>
-          <button id='date-picker-btn' onClick={() => modal.current.open()}>
-            Open Date Range
-          </button>
-            <RangePicker ref={modal} />
-        </section>
-      </header>
+      <button className='phone' onClick={() => setDisplay(!display)}>Swap</button>
+
 
       <main>
 
         <div id='vertical-panes'>
-          <div className='left'>
+          <div className={`left ${display && 'display'}`}>
+          <div>
+          {!userAuth.user &&
+          null
+          }
+          {userAuth.user &&
+          <div className='welcome-top'>
+            <h3>
+              Welcome to BillTrax <br/> {userAuth.user.firstName}!
+            </h3>
+          </div>
+          }
+        </div>
             {selectedChart === 'Doughnut' ? <DoughnutChart /> : <BarChart />}
             <br />
 
@@ -71,24 +82,27 @@ return (
                   View Bar Graph
                 </button>
               </section>      
-            
           </div>
 
-          <div className='right'>
+          <div className={`right ${!display && 'display'}`}>
             <TableView 
               handleRemove={handleRemove}
               />
-          </div>
-            
             <div className='popup-list'>
+              <div className='dates-link'>
+                <a onClick={() => modal.current.open()}>
+                  <DateRangeIcon style={{fontSize: 50}} />
+                  <span>View Dates</span>
+                </a>
+                  <RangePicker ref={modal} />
+              </div>
 
               <div className='expenses-link'>
                 <a onClick={() => addModal.current.open()}>
-                {/* // <a onClick={() => setAdd(!add)}> */}
                   <LibraryAddIcon style={{fontSize: 50}} />
                   <span>Add Expense</span>
                 </a>
-                    <AddExpense ref={addModal} />
+                  <AddExpense ref={addModal} />
               </div>
 
               <div className='goals-link'>
@@ -98,32 +112,17 @@ return (
                 </a>
                     <Goals ref={goalModal} />
               </div>
-
             </div>
-
-
-
-
-
-
+            <br />
+          </div>
         </div>
-
-
       </main>
 
 
-
-
-
-
-
-
-
-
-
-      
       <footer>
-
+        <div className='footer-text'>
+          <p>Copyright &copy; BillTrax 2020</p>
+        </div>
       </footer>
 
 
@@ -132,7 +131,6 @@ return (
 
 
 
-      </div>
     </div>
   )
 }

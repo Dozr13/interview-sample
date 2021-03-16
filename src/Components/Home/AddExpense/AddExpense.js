@@ -25,7 +25,6 @@ function AddExpense({children, fade = false, defaultOpened = false}, ref) {
   
   const createExpense = () => {
     userExpense.createExpense(dueDate, expenseTitle, amount, billType)
-    // console.log('date Expense.js--', dueDate)
     setDate('')
     setTitle('')
     setAmount('')

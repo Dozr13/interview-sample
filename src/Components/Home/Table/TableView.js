@@ -11,10 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 import Row from './Row'
 
-import {format} from 'date-fns/format'
 
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button'
 
 
 
@@ -38,6 +35,7 @@ function TableView(props) {
 
   useEffect((props) => {
     setTableMap (userExpense.expenses.map((e, i) => {
+      // console.log(e)
       return <Row key={i}
         date={e.due_date}
         title={e.expense_title}
@@ -74,17 +72,17 @@ return (
       <Table stickyHeader className={useStyles().table} aria-label='sticky table' align='center'>
         <TableHead>
           <TableRow>
-            <TableCell align='center' style={{fontSize: 18}}>Date Due</TableCell>
-            <TableCell align='center' style={{fontSize: 18}}>Title</TableCell>
-            <TableCell align='center' style={{fontSize: 18}}>Bill Type</TableCell>
-            <TableCell align='center' style={{fontSize: 18}}>Amount</TableCell>
-            <TableCell align='center' style={{fontSize: 18}}>Options</TableCell>
+            <TableCell align='center' style={{fontSize: 24, fontWeight: 700}}>Date Due</TableCell>
+            <TableCell align='center' style={{fontSize: 24, fontWeight: 700}}>Title</TableCell>
+            <TableCell className='computer' align='center' style={{fontSize: 24, fontWeight: 700}}>Bill Type</TableCell>
+            <TableCell align='center' style={{fontSize: 24, fontWeight: 700}}>Amount</TableCell>
+            <TableCell align='center' style={{fontSize: 24, fontWeight: 700}}>Options</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {tableMap.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)}
           <TableRow>
-            <TableCell colSpan={3} align='right' style={{fontSize: 28}}>Total:</TableCell>
+            <TableCell colSpan={3} align='right' style={{fontSize: 28, fontWeight: 700}}>Total:</TableCell>
             <TableCell align='center' style={{fontSize: 28}}>{tableReduce}</TableCell>
           </TableRow>
         </TableBody>

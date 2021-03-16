@@ -4,6 +4,10 @@ import {AuthContext} from '../../Context/AuthContext'
 import SvgIcon from '@material-ui/core/SvgIcon'
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
+
+import MenuIcon from '@material-ui/icons/Menu';
+import { Slider } from '@material-ui/core';
+
 import './Header.scss'
 
 function Header(props) {
@@ -20,27 +24,25 @@ function Header(props) {
   <section className='header-logged-in'>
     <section className='welcome-box'>
       <div className='welcome'>
-        Welcome {userAuth.user.firstName}!
+            {/* <MenuIcon className='phone'>
+              <Slider> */}
         <section className='link-bar'>
-          <div className='home-link'>
-            <Link to="/home"><HomeIcon style={{fontSize: 35}} />
-              <span>Home</span>
-            </Link>
-          </div>
-          <div className='account-link'>
-            <Link to="/editUser"><AccountBoxIcon style={{fontSize: 35}} />
-              <span>User Info</span>
-            </Link>
-          </div>
+                <div className='home-link'>
+                  <Link to="/home"><HomeIcon style={{fontSize: 35}} />
+                    <span>Home</span>
+                  </Link>
+                </div>
+                <div className='account-link'>
+                  <Link to="/editUser"><AccountBoxIcon style={{fontSize: 35}} />
+                    <span>User Info</span>
+                  </Link>
+                </div>
       </section>
+              {/* </Slider>
+            </MenuIcon> */}
       </div>
     </section>
-
-
-    <h1 className='title'>Bill Track</h1>
-
-
-
+        <h1 className='title'>BillTrax</h1>
     <section id='logout-btn'>
       <button
         className='logout-style'
@@ -57,8 +59,8 @@ function Header(props) {
     return (
       <div className='header-logged-out'>
         <div className='logged-out-box'>
-          <h3>Welcome to</h3>
-          <h1 className='title'>Bill Track</h1>
+          <h4>Welcome to</h4>
+          <h2 className='logged-out-title'>BillTrax</h2>
         </div>
       </div>
     )
@@ -78,19 +80,12 @@ function Header(props) {
   return (
     
     <div id='header-bar'>
-      <div className='header-options'>
-
-
-      <section className='header-logged-out'>
-        {!userAuth.user &&
-          loggedOutHeader()
-        }
-        {userAuth.user &&
-          loggedInHeader()
-        }
-      </section>
-
-      </div>
+          {!userAuth.user &&
+            loggedOutHeader()
+          }
+          {userAuth.user &&
+            loggedInHeader()
+          }
     </div>
   )
 }

@@ -1,2 +1,2 @@
 DELETE FROM expenses_junction
-WHERE id = $1;
+WHERE expenses_id = $1;

@@ -1,63 +1,62 @@
-$main-color: #c3c9eb;
-$secondary-color: #c5a5b0;
-$modal-color: #D4BEBB;
+$main-color: rgb(250, 250, 250);
+$secondary-color: #ff790b;
+$modal-color: #fdcb9b;
 $home-head-color: #7EB77F;
+
+$btn-color: #fdcb9b;
+
+$welcome-background: #33639b;
+$welcome-text: #000;
+
+body{
+  overflow-y: hidden;
+}
 
 button{
   cursor: pointer;
-}
-
-.expenses-link a{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  color: red;
-  font-size: 1rem;
-}
-
-.goals-link a{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  color: magenta;
-  font-size: 1rem;
-  margin-top: 3vh;
 }
 
 a:hover{
   cursor: pointer;
 }
 
+footer{
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background-color: $btn-color;
+}
+
+.footer-text{
+  font-size: 18px;
+  font-weight: 500;
+}
+
 
 #home-view{
-  height: 87vh;
+  height: 90vh;
   width: 100vw;
   background-color: $main-color;
   margin: 0;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 
 #home-header{
   width: 100vw;
-  height: 1.5em;
+  height: .5em;
   display: flex;
   justify-content: center;
   background-color: $secondary-color;
 }
 
-
-
-
-
-
-
-
-
-
-
 .home-bar{
   width: 15vw;
-  height: 4vh;
+  // height: 4vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,12 +64,6 @@ a:hover{
   border-bottom-right-radius: 50% 80%;
   background-color: $home-head-color;
 }
-
-
-
-
-
-
 
 
 #date-picker-btn{
@@ -130,6 +123,130 @@ a:hover{
 //       left: 50%;
 //       transform: translate(-50%, -50%);
 // }
+
+
+
+
+
+
+
+
+
+
+
+#vertical-panes{
+  height: 85vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  // overflow-y: hidden;
+}
+
+.left{
+  width: 55vw;
+}
+
+
+
+
+.welcome-top{
+  height: 5vh;
+  width: 17vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: $welcome-text;
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+
+
+
+#view-selection-btns{
+  // width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+.bar-chart-btn{
+  height: 3rem;
+  width: 10rem;
+  background-color: $btn-color;
+  border-radius: 5%;
+}
+
+.doughnut-btn{
+  height: 3rem;
+  width: 10rem;
+  background-color: $btn-color;
+  border-radius: 5%;
+}
+
+.right{
+  width: 43vw;
+}
+
+
+.popup-list{
+  width: 20vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+.dates-link a{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: #391ac5;
+  margin-top: 3vh;
+}
+
+.expenses-link a{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: red;
+  font-size: 1rem;
+  margin-top: 3vh;
+}
+
+.goals-link a{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: #39c539;
+  font-size: 1rem;
+  margin-top: 3vh;
+}
+
+
+
+
+
+.phone{
+  display: none;
+  background-color: $home-head-color;
+  height: 8vh;
+  width: 90vw;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// !AddExpense Component
 .flex-add{
   display: flex;
   flex-direction: column;
@@ -142,63 +259,6 @@ a:hover{
   flex-direction: column;
   justify-content: space-evenly;
 }
-
-
-
-
-
-
-
-
-#vertical-panes{
-  width: 100vw;
-  height: 87vh;
-  display: flex;
-  align-items: center;
-}
-
-.left{
-  width: 55vw;
-  // height: 100vh;
-}
-
-#view-selection-btns{
-  // width: 50%;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-
-.bar-chart-btn{
-  height: 2rem;
-  width: 8rem;
-  background-color: deepskyblue;
-  border: none;
-  border-radius: 45%;
-}
-
-.doughnut-btn{
-  height: 2rem;
-  width: 8rem;
-  background-color: deepskyblue;
-  border: none;
-  border-radius: 45%;
-}
-
-.right{
-  width: 40vw;
-  // height: 100%;
-}
-
-.popup-list{
-  width: 5vw;
-  height: 87vh;
-  display: flex;
-  flex-direction: column;
-}
-
-
-
 
 
 
@@ -246,7 +306,7 @@ a:hover{
   top: 10px;
   color: #5e5e5e;
   cursor: pointer;
-  font-size: 1.25em;
+  font-size: 1.30em;
   padding: 7px;
   background: rgba(29, 27, 27, 0.749);
   border: 1px solid #c3c0c0;
@@ -289,3 +349,38 @@ a:hover{
     opacity: 1;
   }
 }
+
+
+
+
+
+@media screen and (max-width: 408px){
+  .phone{
+    display: inline-block;
+  }
+
+  .computer{
+    display: none !important;
+  }
+
+  .MuiTextField-root{
+    width: 85% !important;
+  }
+
+  .display{
+    display: none;
+  }
+
+  .left{
+    width: 100vw;
+  }
+
+  .right{
+    width: 100vw;
+  }
+
+  .popup-list{
+    width: 100vw;
+  }
+}
+

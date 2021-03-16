@@ -1,13 +1,16 @@
 import React, {useState, useContext, useEffect} from 'react'
-import { ExpenseContext } from '../../../Context/ExpenseContext'
-
+import {ExpenseContext} from '../../../Context/ExpenseContext'
+import {TextField} from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import { TextField } from '@material-ui/core';
+import Dropdown from '../AddExpense/Dropdown-Menu/Dropdown'
 
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+
+import '../Home.scss'
+
 
 
 function Row(props) {
@@ -39,7 +42,7 @@ function Row(props) {
     <TableRow key={props.id}>
       <TableCell align='center'><TextField disabled={!edit} type='date' value={date} onChange={(e) => setDate(e.target.value)} /></TableCell>
       <TableCell align='center'>{!edit ? title : <TextField type='text' value={title} onChange={(e) => setTitle(e.target.value)} />}</TableCell>
-      <TableCell align='center'>{!edit ? type : <TextField type='text' value={type} onChange={(e) => setType(e.target.value)} />}</TableCell>
+      <TableCell className='computer' align='center'>{!edit ? type : <Dropdown type='text' value={props.selectedOption} getValue={setType} onChange={(e) => setType(e.target.value)} />}</TableCell>
       <TableCell align='center'>{!edit ? amount : <TextField type='number' value={amount} onChange={(e) => setAmount(e.target.value)} />}</TableCell>
       <TableCell>
         {edit ? (

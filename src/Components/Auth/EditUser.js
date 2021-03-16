@@ -1,5 +1,8 @@
 import React, {useState, useContext, useEffect} from 'react'
 import {AuthContext} from '../../Context/AuthContext'
+import {TextField} from '@material-ui/core';
+import {Tooltip} from '@material-ui/core';
+
 
 import './User.scss'
 
@@ -28,17 +31,21 @@ function EditUser(props) {
     <div id='edit-page'>
       <div className='user-info'>
         <h1>You can edit your user info here</h1>
-          <h5>Account Name</h5>
-          <input
-            disabled
-            placeholder={email}
-            autoComplete='username'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <h3>Account Name</h3>
+          <Tooltip title='Cannot edit username at this time!'>
+
+            <TextField
+              disabled
+              className='edit-input'
+              placeholder={email}
+              autoComplete='username'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              />
+          </Tooltip>
         <br />
           <h3 className='edit-title'>First Name</h3>
-          <input
+          <TextField
             className='edit-input'
             placeholder='First Name'
             value={firstName}
@@ -46,7 +53,7 @@ function EditUser(props) {
             />
           <br />
             <h3 className='edit-title'>Last Name</h3>
-            <input
+            <TextField
               className='edit-input'
               placeholder='Last Name'
               value={lastName}
@@ -54,7 +61,7 @@ function EditUser(props) {
             />
           <br />
             <h3 className='edit-title'>Password</h3>
-            <input
+            <TextField
               className='edit-input'
               type='password'
               autoComplete='new-password'
@@ -64,7 +71,7 @@ function EditUser(props) {
             />
           <br />
             <h3 className='edit-title'>Profile Picture</h3>
-            <input
+            <TextField
               className='edit-input'
               placeholder='Profile Pic'
               value={profilePic}
@@ -72,7 +79,7 @@ function EditUser(props) {
             />
           <br />
 
-        <button onClick={() => updateUser()}>Update User</button>
+        <button className='update-user' onClick={() => updateUser()}>Update User</button>
       </div>
     </div>
   )

@@ -45,5 +45,8 @@ app.post('/api/expenses-range', auth.userOnly, ctrlExpense.readRangeExpenses)
 app.put('/api/edit-expense/:id', auth.userOnly, ctrlExpense.editExpense)
 app.delete('/api/expense/:id', auth.userOnly, ctrlExpense.deleteExpense) 
 
+// app.put('/api/new-edit/:id', auth.userOnly, ctrlExpense.newEdit)
+
+
 // We're listening
 app.listen(SERVER_PORT, _ => console.log(`Hi! I'm your server and I'm listening on port: ${SERVER_PORT}! This is so exciting!!!`))

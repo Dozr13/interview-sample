@@ -49,7 +49,7 @@ const DoughnutChart = () => {
       if(autoTypes.includes(userExpense.expenses[i].bill_type)){
         auto += +userExpense.expenses[i].amount
       }
-      if(foodTypes.includes(userExpense.expenses[i].bil_type)){
+      if(foodTypes.includes(userExpense.expenses[i].bill_type)){
         food += +userExpense.expenses[i].amount
       }
       if(miscTypes.includes(userExpense.expenses[i].bill_type)){
@@ -113,8 +113,8 @@ const DoughnutChart = () => {
             // }
           ]
         }}
-        height={700}
-        width={700}
+        height={650}
+        width={650}
         options={{
           maintainAspectRatio: false,
             scales: {
