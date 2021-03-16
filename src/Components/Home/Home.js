@@ -64,7 +64,7 @@ return (
           null
           }
           {userAuth.user &&
-          <div className='welcome-top'>
+          <div className='welcome-top computer'>
             <h3>
               Welcome to BillTrax <br/> {userAuth.user.firstName}!
             </h3>
@@ -116,6 +116,16 @@ return (
             <br />
           </div>
         </div>
+        {!userAuth.user &&
+          null
+          }
+          {userAuth.user &&
+          <div className='welcome-top phone'>
+            <h3>
+              Welcome to BillTrax <br/> {userAuth.user.firstName}!
+            </h3>
+          </div>
+          }
       </main>
 
 

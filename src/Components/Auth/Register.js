@@ -25,6 +25,11 @@ function Register() {
   
   return (
     <div className='registration-page'>
+      <section className='reg-login'>
+        <h3>Already a member?</h3>
+        <button  className='back-to-login' onClick={() => history.goBack()}>Back to Login!</button>
+      </section>
+      
         <div className='register-form'>
           <Tooltip title='This will become your username for login!'>
             <TextField
@@ -58,11 +63,6 @@ function Register() {
             />
             <button className='reg-btn' onClick={register}>Register</button>
       </div>
-
-      <section className='reg-login'>
-          <h3>Already a member?</h3>
-          <button  className='back-to-login' onClick={() => history.goBack()}>Back to Login!</button>
-      </section>
 
     </div>
   )

@@ -1,9 +1,7 @@
 import React from 'react'
 import routes from './routes'
 import Header from './Components/Header/Header'
-
 import './App.scss';
-
 
 function App() {
   return (
