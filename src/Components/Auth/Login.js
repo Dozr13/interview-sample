@@ -1,9 +1,10 @@
 import React, {useState, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {AuthContext} from '../../Context/AuthContext'
+import {Button, Tooltip} from '@material-ui/core';
 import './User.scss'
 
-function Login(props) {
+function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const userAuth = useContext(AuthContext)
@@ -22,7 +23,9 @@ function Login(props) {
 
       <form id='login-container' onSubmit={handleLogin}>
 
-        <h3>Welcome! Please Login Below</h3>
+        <div className='intro info'>
+          <h3>Welcome! Please Login Below</h3>
+        </div>        
 
         <section>
           <input
@@ -44,15 +47,15 @@ function Login(props) {
           />
         </section>
 
-        <section id='login-btn'>
+        <div id='login-reg-btns-container'>
           <button 
             className='login-style' 
             type='submit'>
               Login
           </button>
-        </section>
 
-        <section id='register-btn'>
+          <h3>OR</h3>
+
           <Link to='/register' >
             <button 
               className='register-style' 
@@ -60,8 +63,15 @@ function Login(props) {
                 Register
             </button>
           </Link>
-        </section>
+        </div>
 
+
+        <section className='about-tool-tip'>
+          <Tooltip title='It can be a rather daunting task managing your money and keeping track of what you’ve spent over time as well as when and where. Introducing BillTrax - an app used to keep track of your monthly bills, previous and upcoming. 
+          '>
+            <Button>Find out more!</Button>
+          </Tooltip>
+        </section>
 
       </form>
     </div>

@@ -1,22 +1,44 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {AuthContext} from '../../Context/AuthContext'
+import {Slide} from '@material-ui/core';
 import SvgIcon from '@material-ui/core/SvgIcon'
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-
-
 import MenuIcon from '@material-ui/icons/Menu';
-import { Slider } from '@material-ui/core';
 
 import './Header.scss'
 
 function Header(props) {
-
   const userAuth = useContext(AuthContext)
+  const [open, setOpen] = useState(true)
   
   const handleLogout = () => {
     userAuth.logout()
 }
+
+  // const [dimensions, setDimensions] = useState(() => getDimensions());
+
+
+
+//   useEffect(() => {         
+//     const resizeListener = () => {             
+//       setDimensions(getDimensions());         
+//     }         
+//     window.addEventListener('resize', resizeListener);         
+//     return () => window.removeEventListener('resize', resizeListener);     
+//   }, [])
+
+//     useEffect(() => {
+//       if(dimensions.width > 408) {
+//           setOpen(true);
+//       } else {
+//           setOpen(false);
+//       }
+//   }, [dimensions.width])
+
+//   const getDimensions = () => {
+//     return { width: window.innerWidth}
+// }
 
 
   const loggedInHeader = () => {
@@ -24,34 +46,33 @@ function Header(props) {
   <section className='header-logged-in'>
     <section className='welcome-box'>
       <div className='welcome'>
-            {/* <MenuIcon className='phone'>
-              <Slider> */}
-        <section className='link-bar'>
-                <div className='home-link'>
-                  <Link to="/home"><HomeIcon style={{fontSize: 35}} />
-                    <span>Home</span>
-                  </Link>
-                </div>
-                <div className='account-link'>
-                  <Link to="/editUser"><AccountBoxIcon style={{fontSize: 35}} />
-                    <span>User Info</span>
-                  </Link>
-                </div>
+        {/* <MenuIcon className='phone' onClick={() => setOpen(!open)} /> */}
+          {/* <Slide direction='top' in={open} timeout={500} mountOnEnter unmountOnExit> */}
+            <section className='link-bar'>
+              <div className='home-link'>
+                <Link to="/home"><HomeIcon style={{fontSize: 35}} />
+                  <span>Home</span>
+                </Link>
+              </div>
+              <div className='account-link'>
+                <Link to="/editUser"><AccountBoxIcon style={{fontSize: 35}} />
+                  <span>User Info</span>
+                </Link>
+              </div>
+            </section>
+          {/* </Slide> */}
+        </div>
       </section>
-              {/* </Slider>
-            </MenuIcon> */}
-      </div>
-    </section>
         <h1 className='title'>BillTrax</h1>
-    <section id='logout-btn'>
-      <button
-        className='logout-style'
-        type='submit'
-        onClick={handleLogout}>
-        Logout
-      </button>
+      <section id='logout-btn'>
+        <button
+          className='logout-style'
+          type='submit'
+          onClick={handleLogout}>
+          Logout
+        </button>
+      </section>
     </section>
-  </section>
   )}
 
 

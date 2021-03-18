@@ -26,10 +26,11 @@ $orange: #FFA500;
   margin: 10px;
 }
 
-#login-btn{
+#login-reg-btns-container{
+  width: 21vw;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  // align-items: center;
+  justify-content: space-evenly;
 }
 
 .login-style{
@@ -42,6 +43,10 @@ $orange: #FFA500;
   font-weight: 700;
 }
 
+.about-tool-tip{
+  margin-top: 2em;
+}
+
 #register-btn{
   display: flex;
   position: absolute;
@@ -52,7 +57,7 @@ $orange: #FFA500;
 .register-style{
   height: 3rem;
   width: 8rem;
-  border-radius: 50%;
+  border-radius: 30%;
   background-color: orange;
 }
 
