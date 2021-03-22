@@ -107,7 +107,7 @@ const DoughnutChart = () => {
             // {
             //   label: `'s expected spending`,
             //   data: [home, insurance, auto, food, miscellaneous],
-            //   backgroundColor: '#000',
+            //   backgroundColor: ['#AF1B3F', '#E28413', '#CEE7E6', '#7CDF64', '#5F5AA2'],
             //   borderColor: 'red',
             //   borderWidth: 2
             // }

@@ -10,6 +10,7 @@ function Register() {
   const [lastName, setLast] = useState('')
   const [password, setPassword] = useState('')
   const [profilePic, setPic] = useState('')
+  
   const userAuth = useContext(AuthContext)
 
   const history = useHistory()
