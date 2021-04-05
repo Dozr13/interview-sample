@@ -9,7 +9,7 @@ module.exports = {
 // console.log({checkDate})
       if(checkDate){
         const [expense] = await db.expenses.create_expense([expenseTitle, amount, billType, id])
-// console.log({expense})
+console.log({expense}, {dueDate})
         await db.expense_junction.create_expense_junction(checkDate.id, expense.id)
          const expenses = await db.expenses.read_day_expenses(req.session.user.id, dueDate)
 // console.log('create expenses ctrl') 
@@ -70,7 +70,7 @@ module.exports = {
     readRangeExpenses: async (req, res) => {
       const {id} = req.session.user;
       const {startDate, endDate} = req.body;
-// console.log('read range', startDate, endDate)
+console.log('read range', startDate, endDate)
       const db = await req.app.get('db')
       if (startDate && endDate){
         db.expenses.read_all_expenses_date(id, startDate, endDate)

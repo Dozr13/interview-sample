@@ -11,7 +11,7 @@ export const ExpenseProvider = (props) => {
   const [range, setRange] = useState([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      endDate: addDays(new Date(), 10),
       key: 'selection'
     }
   ]);
@@ -19,16 +19,20 @@ export const ExpenseProvider = (props) => {
   const readRangeExpenses = (selection) => {
     setRange(selection)
     axios.post('/api/expenses-range', {...selection}).then((res) => {
+      console.log(selection)
       setExpense(res.data)
     }).catch(err => console.log(err))
   }
 
   const createExpense = (dueDate, expenseTitle, amount, billType, selection) => {
     axios.post('/api/new-expense', {dueDate, expenseTitle, amount, billType}).then(({data}) => {
+      console.log({dueDate})
       axios.post('/api/expenses-range', {...selection}).then(() => {
-        readRangeExpenses(range)
+        console.log({dueDate})
+        readRangeExpenses(selection)
       }).catch(err => console.log('createExpenseTest inner .catch', err, data))
-      readRangeExpenses(range)
+      console.log({dueDate})
+      readRangeExpenses(selection)
     }).catch(err => console.log(dueDate))
   }
 

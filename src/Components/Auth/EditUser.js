@@ -6,25 +6,39 @@ import {Tooltip} from '@material-ui/core';
 
 import './User.scss'
 
-function EditUser(props) {
+function EditUser() {
   const userAuth = useContext(AuthContext)
   
+  useEffect(() => {
+    userAuth.getUser()
+  }, [])
+
+
   const [email, setEmail] = useState('')
   const [firstName, setFirst] = useState('')
   const [lastName, setLast] = useState('')
   const [password, setPassword] = useState('')
   const [profilePic, setPic] = useState('')
 
+
+
   useEffect(() => {
+    console.log(userAuth.user)
     setEmail(userAuth.user.email)
     setFirst(userAuth.user.firstName)
     setLast(userAuth.user.lastName)
     setPassword(userAuth.user.password)
     setPic(userAuth.user.profilePic)
-  }, [props])
+  }, [])
+
+
+  const handleInputChange = (e) => {
+    
+  }
+
 
   const updateUser = (e) => {
-    userAuth.updateUser(email, firstName, lastName, password, profilePic, props.id)
+    userAuth.updateUser(email, firstName, lastName, password, profilePic, userAuth.user.id)
   }
   
   return (
@@ -38,7 +52,7 @@ function EditUser(props) {
               disabled
               className='edit-input'
               placeholder={email}
-              autoComplete='username'
+              // autoComplete='username'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               />

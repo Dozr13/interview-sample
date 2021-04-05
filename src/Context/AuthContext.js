@@ -5,11 +5,43 @@ import axios from 'axios'
 export const AuthContext = createContext(null)
 
 export const AuthProvider = (props) => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState('')
+
+  // const initialState = {
+  //   isAuthenticated: false,
+  //   user: null,
+  //   token: null,
+  // };
+
+  // const reducer = (state, action) => {
+  //   switch (action.type) {
+  //     case "LOGIN":
+  //       localStorage.setItem("user", JSON.stringify(action.payload.user));
+  //       localStorage.setItem("token", JSON.stringify(action.payload.token));
+  //       return {
+  //         ...state,
+  //         isAuthenticated: true,
+  //         user: action.payload.user,
+  //         token: action.payload.token
+  //       };
+  //     case "LOGOUT":
+  //       localStorage.clear();
+  //       return {
+  //         ...state,
+  //         isAuthenticated: false,
+  //         user: null,
+  //         token: null,
+  //       };
+  //     default:
+  //       return state;
+  //   }
+  // };
+
+  
   const {push} = useHistory()
   
   const getUser = () => {
-    axios.get('/api/auth/me').then(({data}) => {
+    axios.get('/api/auth/user').then(({data}) => {
       setUser(data)
     })
   }

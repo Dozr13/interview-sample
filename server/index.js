@@ -27,19 +27,19 @@ app.use(
     resave: true,
     saveUninitialized: false,
     secret: SESSION_SECRET,
-    cookies: {maxAge: 40000000}
+    cookies: {maxAge: 1000 * 60 * 60 * 60}
   })
 )
 
 // Authorization Endpoints
 app.post('/api/auth/register', ctrlUser.register)
 app.post('/api/auth/login', ctrlUser.login)
-app.get('/api/auth/me', ctrlUser.getUser)
+app.get('/api/auth/user', ctrlUser.getUser)
 app.post('/api/auth/logout', ctrlUser.logout)
 app.put('/api/auth/update/:id', ctrlUser.editUser)
 
 // Expense Endpoints
-app.post('/api/read-day', auth.userOnly, ctrlExpense.readDayExpense)
+// app.post('/api/read-day', auth.userOnly, ctrlExpense.readDayExpense)
 app.post('/api/new-expense', auth.userOnly, ctrlExpense.createExpense)
 app.post('/api/expenses-range', auth.userOnly, ctrlExpense.readRangeExpenses)
 app.put('/api/edit-expense/:id', auth.userOnly, ctrlExpense.editExpense)

@@ -10,7 +10,14 @@ import './Header.scss'
 
 function Header(props) {
   const userAuth = useContext(AuthContext)
-  const [open, setOpen] = useState(true)
+  // const [open, setOpen] = useState(true)
+
+  useEffect(() => {
+    console.log(userAuth.user)
+    userAuth.getUser()
+  }, [])
+
+
   
   const handleLogout = () => {
     userAuth.logout()

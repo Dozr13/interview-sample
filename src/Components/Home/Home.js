@@ -1,7 +1,10 @@
 import React, {useState, useEffect, useContext, useRef} from 'react'
 import {ExpenseContext} from '../../Context/ExpenseContext'
 import {AuthContext} from '../../Context/AuthContext'
-import {endOfMonth, startOfMonth} from 'date-fns';
+
+import {addDays} from 'date-fns';
+
+
 import AddExpense from './AddExpense/AddExpense'
 import Goals from './Goals/Goals'
 import UserExpenses from './UserExpected/UserExpected'
@@ -33,12 +36,11 @@ function Home() {
   const goalModal = useRef(null)
   const userModal = useRef(null)
 
-  const date = new Date()
-
   useEffect(() => {
+    console.log(userExpense.readRangeExpenses.startDate)
     userExpense.readRangeExpenses({
-      startDate: startOfMonth(new Date(date.getFullYear(), date.getMonth(), 1)),
-      endDate: endOfMonth(new Date(date.getFullYear(), date.getMonth(), 0)),
+      startDate: new Date(),
+      endDate: addDays(new Date(), 30),
       key: 'default'
     })
   }, [])
@@ -49,6 +51,7 @@ function Home() {
   }
 
   
+
 
 return (
   
@@ -75,7 +78,7 @@ return (
           }
         </div>
             {selectedChart === 'Doughnut' ? <DoughnutChart /> : <BarChart />}
-            <br />
+        <br />
 
               <section id='view-selection-btns'>
                 <button className='doughnut-btn' onClick={() => setSelectedChart('Doughnut')}>
@@ -87,7 +90,9 @@ return (
               </section>      
           </div>
 
+
           <div className={`right ${!display && 'display'}`}>
+
             <TableView 
               handleRemove={handleRemove}
               />

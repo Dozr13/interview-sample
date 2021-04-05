@@ -35,6 +35,16 @@ function RangePicker({ children, fade = false, defaultOpened = false }, ref) {
       document.removeEventListener('keydown', handleEscape, false)
     }
   }, [handleEscape, isOpen])
+
+
+  // const handleSelect = (ranges) => {
+  //   console.log(range)
+  //   {
+  //     selection: {
+  //       startDate: 
+  //     }
+  //   }
+  // }
   
 
   const [range, setRange] = useState([
@@ -45,8 +55,10 @@ function RangePicker({ children, fade = false, defaultOpened = false }, ref) {
     }
   ]);
 
+  console.log(range[0].startDate)
 
   const dayHandler = (item) => {
+    // console.log(item.selection.startDate)
     setRange([item.selection])
     userExpense.setRange([item.selection])
     userExpense.readRangeExpenses(item.selection)
@@ -65,6 +77,7 @@ function RangePicker({ children, fade = false, defaultOpened = false }, ref) {
           <h2 className='modal-font'>Select Date Range to view</h2>
           <DateRangePicker
             onChange={dayHandler}
+            dateDisplayFormat='yyyy-MM-dd'
             showSelectionPreview={true}
             moveRangeOnFirstSelection={false}
             months={1}
