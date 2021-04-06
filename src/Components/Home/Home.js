@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext, useRef} from 'react'
 import {ExpenseContext} from '../../Context/ExpenseContext'
 import {AuthContext} from '../../Context/AuthContext'
 
-import {addDays} from 'date-fns';
+import {format, addDays, parseISO} from 'date-fns';
 
 
 import AddExpense from './AddExpense/AddExpense'
@@ -39,8 +39,8 @@ function Home() {
   useEffect(() => {
     console.log(userExpense.readRangeExpenses.startDate)
     userExpense.readRangeExpenses({
-      startDate: new Date(),
-      endDate: addDays(new Date(), 30),
+      startDate: format(new Date(), 'yyyy-MM-dd', { awareOfUnicodeTokens: true }),
+      endDate: format(new Date(), 'yyyy-MM-dd', { awareOfUnicodeTokens: true }, addDays(new Date(), 30)),
       key: 'default'
     })
   }, [])

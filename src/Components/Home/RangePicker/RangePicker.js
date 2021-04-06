@@ -2,7 +2,12 @@ import React, {useEffect, useImperativeHandle, useState, forwardRef, useCallback
 import { createPortal } from 'react-dom'
 import {ExpenseContext} from '../../../Context/ExpenseContext'
 import {DateRangePicker} from 'react-date-range';
-import {addDays} from 'date-fns';
+import {addDays, format, parseISO} from 'date-fns';
+
+
+
+
+
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import '../Home.scss'
@@ -37,20 +42,12 @@ function RangePicker({ children, fade = false, defaultOpened = false }, ref) {
   }, [handleEscape, isOpen])
 
 
-  // const handleSelect = (ranges) => {
-  //   console.log(range)
-  //   {
-  //     selection: {
-  //       startDate: 
-  //     }
-  //   }
-  // }
   
 
   const [range, setRange] = useState([
     {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      startDate: format(new Date(), 'yyyy-MM-dd', { awareOfUnicodeTokens: true }),
+      endDate: format(new Date(), 'yyyy-MM-dd', { awareOfUnicodeTokens: true }),
       key: 'selection'
     }
   ]);
