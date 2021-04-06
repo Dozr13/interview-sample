@@ -37,10 +37,10 @@ function Home() {
   const userModal = useRef(null)
 
   useEffect(() => {
-    console.log(userExpense.readRangeExpenses.startDate)
+    console.log('home', userExpense.range)
     userExpense.readRangeExpenses({
-      startDate: format(new Date(), 'yyyy-MM-dd', { awareOfUnicodeTokens: true }),
-      endDate: format(new Date(), 'yyyy-MM-dd', { awareOfUnicodeTokens: true }, addDays(new Date(), 30)),
+      startDate: new Date(),
+      endDate: addDays(new Date(), 30),
       key: 'default'
     })
   }, [])

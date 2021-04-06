@@ -69,7 +69,22 @@ console.log({expense}, {dueDate})
 
     readRangeExpenses: async (req, res) => {
       const {id} = req.session.user;
-      const {startDate, endDate} = req.body;
+      let {startDate, endDate} = req.body;
+console.log(typeof startDate, startDate instanceof Date)
+      startDate = new Date(startDate)
+      endDate = new Date(endDate)
+      if (startDate instanceof Date && endDate instanceof Date){
+        startDate = `${startDate.getFullYear()}-${(startDate.getMonth() + 1) <= 9 
+          ? '0' + (startDate.getMonth()+1) 
+          : startDate.getMonth()+1}-${startDate.getDate() <= 9 
+            ? '0'+startDate.getDate() 
+            : startDate.getDate()}`
+        endDate = `${endDate.getFullYear()}-${(endDate.getMonth() + 1) <= 9 
+          ? '0' + (endDate.getMonth()+1) 
+          : endDate.getMonth()+1}-${endDate.getDate() <= 9 
+            ? '0'+endDate.getDate() 
+            : endDate.getDate()}`
+      }
 console.log('read range', startDate, endDate)
       const db = await req.app.get('db')
       if (startDate && endDate){

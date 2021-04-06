@@ -50,50 +50,49 @@ function AddExpense({children, fade = false, defaultOpened = false}, ref) {
     isOpen ? (
       <div className={`modal ${fade ? 'modal-fade' : ''}`}>
         <div className="modal-overlay" onClick={close} />
-          <div className='background-container'>
+          <div className='background-container'></div>
+          <div className="modal-body-add">
+  
+            <h2 className='modal-font'>Add a new expense</h2>
+            <div className='flex-add'>
+              <div className='add-inputs'>
+                <div className='drop-down'>
+                  <div className='center'>
+                    <Dropdown value={Dropdown.selectedOption} getValue={setType} />
+                  </div>
+                </div>
+              <br />
+                <TextField
+                  type='date'
+                  label='Set a Due Date'
+                  InputLabelProps={{shrink: true}}
+                  value={dueDate}
+                  onChange={(e) => setDate(e.target.value)}
+                />
+              <br />
+                <TextField 
+                  type='text'
+                  placeholder='Expense Name'
+                  value={expenseTitle}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              <br />
+                <TextField
+                  type='text'
+                  placeholder='Amount'
+                  value={amount}
+                  onInput={(e) => setAmount(e.target.value.replace(/[^0-9.]/g, ''))}
+                />
+              </div>
+            <br />
+              <button onClick={createExpense}>Add New Expense</button>
 
+            </div>
           </div>
-        <div className="modal-body">
-          <h2 className='modal-font'>Add a new expense</h2>
-     
-    <div className='flex-add'>
-      <div className='add-inputs'>
-
-        <TextField
-          type='date'
-          label='Set a Due Date'
-          InputLabelProps={{shrink: true}}
-          value={dueDate}
-          onChange={(e) => setDate(e.target.value)}
-          />
-        <TextField 
-          type='text'
-          placeholder='Expense Name'
-          value={expenseTitle}
-          onChange={(e) => setTitle(e.target.value)}
-          />
-        <TextField
-          type='text'
-          placeholder='Amount'
-          value={amount}
-          onInput={(e) => setAmount(e.target.value.replace(/[^0-9.]/g, ''))}
-          />
-
-        <div className='drop-down'>
-          <div className='center'>
-            <Dropdown value={Dropdown.selectedOption} getValue={setType} />
-          </div>
-        </div>
-
-  </div>
-        <button onClick={createExpense}>Add Expense</button>
-
-    </div>
-    </div>
           <span role="button" className="modal-close" aria-label="close" onClick={close}>
             X
           </span>
-      </div>
+        </div>
     ) : null,
     modalElement
   )

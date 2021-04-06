@@ -46,13 +46,13 @@ function RangePicker({ children, fade = false, defaultOpened = false }, ref) {
 
   const [range, setRange] = useState([
     {
-      startDate: format(new Date(), 'yyyy-MM-dd', { awareOfUnicodeTokens: true }),
-      endDate: format(new Date(), 'yyyy-MM-dd', { awareOfUnicodeTokens: true }),
+      startDate: new Date(),
+      endDate: addDays(new Date(), 30),
       key: 'selection'
     }
   ]);
 
-  console.log(range[0].startDate)
+  // console.log('picker', range[0].startDate)
 
   const dayHandler = (item) => {
     // console.log(item.selection.startDate)

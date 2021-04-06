@@ -81,7 +81,7 @@ const Dropdown = (props) => {
         className='dropbox' 
         placeholder='Expense Type' 
         options={options} 
-        menuPlacement='top'
+        menuPlacement='bottom'
         maxMenuHeight={200}
         onChange={handleChange} />
     </div>

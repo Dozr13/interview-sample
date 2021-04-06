@@ -1,5 +1,5 @@
 import {createContext, useState} from 'react'
-import {addDays} from 'date-fns';
+import {format, parseISO, addDays} from 'date-fns';
 import axios from 'axios'
 
 
@@ -10,8 +10,8 @@ export const ExpenseProvider = (props) => {
 
   const [range, setRange] = useState([
     {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 10),
+      startDate: format(new Date(), 'yyyy-MM-dd', { awareOfUnicodeTokens: true }),
+      endDate: format(new Date(), 'yyyy-MM-dd', { awareOfUnicodeTokens: true }, addDays(new Date(), 30)),
       key: 'selection'
     }
   ]);
@@ -19,20 +19,19 @@ export const ExpenseProvider = (props) => {
   const readRangeExpenses = (selection) => {
     setRange(selection)
     axios.post('/api/expenses-range', {...selection}).then((res) => {
-      console.log(selection)
       setExpense(res.data)
     }).catch(err => console.log(err))
   }
 
   const createExpense = (dueDate, expenseTitle, amount, billType, selection) => {
     axios.post('/api/new-expense', {dueDate, expenseTitle, amount, billType}).then(({data}) => {
-      console.log({dueDate})
+      console.log('1', {dueDate})
       axios.post('/api/expenses-range', {...selection}).then(() => {
-        console.log({dueDate})
-        readRangeExpenses(selection)
+        console.log('2', {dueDate}, {selection})
+        readRangeExpenses(...selection)
       }).catch(err => console.log('createExpenseTest inner .catch', err, data))
-      console.log({dueDate})
-      readRangeExpenses(selection)
+      console.log('3', {dueDate}, selection.startDate)
+      readRangeExpenses(range)
     }).catch(err => console.log(dueDate))
   }
 
