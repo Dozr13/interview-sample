@@ -56,12 +56,8 @@ function AddExpense({children, fade = false, defaultOpened = false}, ref) {
             <h2 className='modal-font'>Add a new expense</h2>
             <div className='flex-add'>
               <div className='add-inputs'>
-                <div className='drop-down'>
-                  <div className='center'>
-                    <Dropdown value={Dropdown.selectedOption} getValue={setType} />
-                  </div>
-                </div>
-              <br />
+                <br />
+                
                 <TextField
                   type='date'
                   label='Set a Due Date'
@@ -69,14 +65,16 @@ function AddExpense({children, fade = false, defaultOpened = false}, ref) {
                   value={dueDate}
                   onChange={(e) => setDate(e.target.value)}
                 />
-              <br />
+                <br />
+
                 <TextField 
                   type='text'
                   placeholder='Expense Name'
                   value={expenseTitle}
                   onChange={(e) => setTitle(e.target.value)}
                 />
-              <br />
+                <br />
+
                 <TextField
                   type='text'
                   placeholder='Amount'
@@ -84,8 +82,14 @@ function AddExpense({children, fade = false, defaultOpened = false}, ref) {
                   onInput={(e) => setAmount(e.target.value.replace(/[^0-9.]/g, ''))}
                 />
               </div>
-            <br />
-              <button onClick={createExpense}>Add New Expense</button>
+              <br />
+                <div className='drop-down'>
+                  <div className='center'>
+                    <Dropdown value={Dropdown.selectedOption} getValue={setType} />
+                  </div>
+                </div>
+
+              <button className='add-exp-btn' onClick={createExpense}>Add New Expense</button>
 
             </div>
           </div>

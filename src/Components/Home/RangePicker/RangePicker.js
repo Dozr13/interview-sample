@@ -73,6 +73,7 @@ function RangePicker({ children, fade = false, defaultOpened = false }, ref) {
         <div className="modal-body">
           <h2 className='modal-font'>Select Date Range to view</h2>
           <DateRangePicker
+            className='picker-style'
             onChange={dayHandler}
             dateDisplayFormat='yyyy-MM-dd'
             showSelectionPreview={true}

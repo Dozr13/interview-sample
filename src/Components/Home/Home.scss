@@ -180,6 +180,12 @@ footer{
 
 
 
+.picker-style{
+  margin: 2rem;
+}
+
+
+
 
 // ! Defines phone use
 .phone{
@@ -205,23 +211,39 @@ footer{
 .flex-add{
   display: flex;
   flex-direction: column;
-  margin: 5rem;
+  margin: 3rem;
 }
 
 .add-inputs{
   height: 20vh;
-  width: 15vw;
+  width: 18vw;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
 
+.add-exp-btn{
+  height: 3.7rem;
+  font-size: 1.5rem;
+  font-weight: 550;
+  background-color: rgb(54, 43, 43);
+  border: #ff790b;
+  border-radius: 25px;
+  color: #f3d5bc;
+  margin-top: 3rem;
+}
+
+.add-exp-btn:hover{
+  background-color: #ecab75;
+  color: #fff;
+  border:2px solid #39c539;
+}
 
 
 
 .modal {
   position: fixed;
-  overflow: hidden;
+  overflow: visible;
   top: 0;
   right: 0;
   bottom: 0;
@@ -288,7 +310,7 @@ footer{
   margin: 0 auto;
   background-color: $modal-color;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 3px;
+  border-radius: 55px;
   overflow-x: hidden;
   overflow-y: auto;
   max-height: 100%;
@@ -302,11 +324,11 @@ footer{
   margin: 0 auto;
   background-color: $modal-color;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 3px;
-  overflow-x: hidden;
-  overflow-y: auto;
+  border-radius: 55px;
+  overflow-x: visible;
+  overflow-y: visible;
   max-height: 100%;
-  padding: 15px 20px;
+  // padding: 15px 20px;
   color: #c3c0c0;
 }
 
