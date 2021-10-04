@@ -6,19 +6,15 @@ module.exports = {
     const {id} = req.session.user
     const {dueDate, expenseTitle, amount, billType} = req.body
     const [checkDate] = await db.expenses_date.check_date(dueDate)
-// console.log({checkDate})
       if(checkDate){
         const [expense] = await db.expenses.create_expense([expenseTitle, amount, billType, id])
 console.log({expense}, {dueDate})
         await db.expense_junction.create_expense_junction(checkDate.id, expense.id)
          const expenses = await db.expenses.read_day_expenses(req.session.user.id, dueDate)
-// console.log('create expenses ctrl') 
-// console.log(expenses)
             res.status(200).send(expenses)
         } else {
           const [checkDate] = await db.expenses_date.create_date(dueDate)
           const [expense] = await db.expenses.create_expense([expenseTitle, amount, billType, id])
-// console.log({expense})
           await db.expense_junction.create_expense_junction(checkDate.id, expense.id)
            const expenses = await db.expenses.read_day_expenses(req.session.user.id, dueDate)
            res.status(200).send(expenses)
@@ -31,10 +27,8 @@ console.log({expense}, {dueDate})
   
   // ! Used to display expenses of selected date
   readDayExpense: async (req, res) => {
-// console.log('click', req.body)
     const {id} = req.session.user
     const {dueDate} = req.body
-// console.log(dueDate)
     const db = req.app.get('db')
     if (dueDate){
       if(dueDate.day <= 9){
@@ -44,10 +38,8 @@ console.log({expense}, {dueDate})
         dueDate.month = `0${dueDate.month}`
       } 
       const date = `${dueDate.year}-${dueDate.month}-${dueDate.day}`
-// console.log('isItString', id, date, typeof date)
       db.expenses.read_day_expenses(id, date)
       .then(expenses => {
-// console.log('read expenses ctrl', expenses) 
         res.status(200).send(expenses)
       })
       .catch(err => console.log(err))
@@ -57,7 +49,6 @@ console.log({expense}, {dueDate})
   // ! Used in TableView.js to delete expenses from db
   deleteExpense: (req, res) => {
     const db = req.app.get('db')
-// console.log('delete', req.params, req.session.user)
     db.expenses.delete_expense([+req.params.id, req.session.user.id])
       .then(_ => {
           res.sendStatus(200)
@@ -70,7 +61,6 @@ console.log({expense}, {dueDate})
     readRangeExpenses: async (req, res) => {
       const {id} = req.session.user;
       let {startDate, endDate} = req.body;
-console.log(typeof startDate, startDate instanceof Date)
       startDate = new Date(startDate)
       endDate = new Date(endDate)
       if (startDate instanceof Date && endDate instanceof Date){
@@ -85,7 +75,6 @@ console.log(typeof startDate, startDate instanceof Date)
             ? '0'+endDate.getDate() 
             : endDate.getDate()}`
       }
-console.log('read range', startDate, endDate)
       const db = await req.app.get('db')
       if (startDate && endDate){
         db.expenses.read_all_expenses_date(id, startDate, endDate)
@@ -99,7 +88,6 @@ console.log('read range', startDate, endDate)
   },
 
 
-  // Passes Postman test
   // ! Still not saving edit!
   editExpense: async (req, res) => {
     const {dueDate, expenseTitle, amount, billType} = req.body

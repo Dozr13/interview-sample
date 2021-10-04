@@ -13,14 +13,11 @@ function EditUser() {
     userAuth.getUser()
   }, [])
 
-
   const [email, setEmail] = useState('')
   const [firstName, setFirst] = useState('')
   const [lastName, setLast] = useState('')
   const [password, setPassword] = useState('')
   const [profilePic, setPic] = useState('')
-
-
 
   useEffect(() => {
     console.log(userAuth.user)
